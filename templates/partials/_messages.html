@@ -1,0 +1,13 @@
+{% load i18n %}
+{% if messages %}
+<div class="flash-stack" role="status" aria-live="polite">
+  {% for m in messages %}
+    {% with tag=m.tags|default:'info' %}
+    <div class="flash flash--{% if tag == 'error' %}danger{% else %}{{ tag }}{% endif %}">
+      <div>{{ m }}</div>
+      <button class="flash__close" type="button" data-flash-close aria-label="{% trans 'Close' %}">×</button>
+    </div>
+    {% endwith %}
+  {% endfor %}
+</div>
+{% endif %}

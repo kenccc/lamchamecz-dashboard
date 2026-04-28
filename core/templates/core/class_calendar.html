@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktrans with code=cls.code %}Calendar – {{ code }}{% endblocktrans %}{% endblock %}
+{% block content %}
+<header class="section">
+  <h2 class="mb-1">{% trans "Calendar" %}: {{ cls.code }} – {{ cls.subject }}</h2>
+  <p class="text-muted">
+    {% trans "Planned lessons:" %} <strong>{{ session_count }}</strong> ·
+    {{ cls.date_start }} → {{ cls.date_end }}
+  </p>
+</header>
+
+<div class="calendar-layout">
+  <section class="glass-card">
+    <div class="glass-card__header">{% trans "Monthly overview" %}</div>
+    {% if months %}
+      <div class="calendar-grid">
+        {% for month_name, days in months %}
+          <div class="month-card" data-reveal data-reveal-group="months">
+            <div class="month-card__head">{{ month_name }}</div>
+            <ul class="month-card__list">
+              {% for d in days %}
+                <li>{{ d|date:"d/m/Y" }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-muted">{% trans "No lessons in the given range." %}</p>
+    {% endif %}
+  </section>
+
+  <aside class="glass-card">
+    <div class="glass-card__header">{% trans "Days off" %}</div>
+    <form method="post" class="stack stack-sm mb-3">
+      {% csrf_token %}
+      {{ form.date }}
+      <button class="btn btn--primary btn--sm" type="submit">+ {% trans "Add" %}</button>
+    </form>
+    <ul class="dayoff-list">
+      {% for d in days_off %}
+        <li class="dayoff-item">
+          <span>{{ d.date|date:"d/m/Y" }}</span>
+          <form method="post" action="{% url 'dayoff_remove' d.pk %}">
+            {% csrf_token %}
+            <button class="btn btn--ghost btn--sm" type="submit" aria-label="{% trans 'Remove' %}">×</button>
+          </form>
+        </li>
+      {% empty %}
+        <li class="dayoff-empty">{% trans "None" %}</li>
+      {% endfor %}
+    </ul>
+  </aside>
+</div>
+{% endblock %}

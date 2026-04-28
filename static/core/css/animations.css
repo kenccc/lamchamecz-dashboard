@@ -1,0 +1,166 @@
+/* ============================================================
+   Animations — composited (transform + opacity) only.
+   Gated by .js on <html> to avoid FOUC for no-JS users.
+   ============================================================ */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fade-in-down {
+  from { opacity: 0; transform: translate3d(0, -8px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translate3d(16px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translate3d(0, -8px, 0); max-height: 0; }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); max-height: 800px; }
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.45); }
+  70%  { box-shadow: 0 0 0 10px rgba(15, 118, 110, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(15, 118, 110, 0); }
+}
+
+/* ---------- Page-level fade-in on <main> ---------- */
+.js main.container {
+  animation: fade-in var(--dur-slow) var(--ease-out) both;
+}
+
+/* ---------- Reveal utility (IntersectionObserver) ---------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  will-change: transform, opacity;
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Cancel will-change once settled to free compositor memory */
+.js [data-reveal].is-visible {
+  will-change: auto;
+}
+
+/* ---------- Stagger via CSS variable set inline by JS ---------- */
+.js [data-reveal] {
+  transition-delay: calc(var(--reveal-i, 0) * var(--stagger));
+}
+
+/* ---------- Scoped entrance animations (no-JS still see content) ---------- */
+.js .glass-nav {
+  animation: fade-in-down var(--dur-slow) var(--ease-out) both;
+}
+
+.js .auth-card {
+  animation: scale-in var(--dur-slow) var(--ease-out) both;
+}
+
+.js .flash {
+  animation: slide-in-right var(--dur-base) var(--ease-out) both;
+}
+
+/* ---------- Mobile menu open/close ---------- */
+.js .glass-nav__menu.is-open {
+  animation: slide-down var(--dur-base) var(--ease-out) both;
+}
+
+/* ---------- Nav active link indicator ---------- */
+.glass-nav__link {
+  position: relative;
+}
+
+.glass-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 4px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.glass-nav__link.is-active::after,
+.glass-nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+/* On mobile (full-width vertical menu) the underline reads as a misalignment;
+   keep just the background highlight already on .is-active. */
+@media (max-width: 900px) {
+  .glass-nav__link::after { display: none; }
+}
+
+/* ---------- Tile / card hover refinement ---------- */
+.tile,
+a.glass-card,
+.glass-card--link {
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.tile:active,
+a.glass-card:active,
+.glass-card--link:active {
+  transform: translateY(-1px);
+  transition-duration: var(--dur-fast);
+}
+
+/* ---------- Button micro-press feels snappier ---------- */
+.btn {
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+/* ---------- Brand dot subtle pulse on hover ---------- */
+.glass-nav__brand:hover::before {
+  animation: pulse-ring 1.4s var(--ease-out) infinite;
+}
+
+/* ---------- Reduced motion: shorten, don't fully kill (keep events firing) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block title %}{% trans "Sign in" %}{% endblock %}
+{% block content %}
+<div class="auth-shell">
+  <div class="auth-card">
+    <header class="auth-card__brand">
+      <div class="auth-card__logo">
+        <img src="{% static 'core/img/logo.png' %}" alt="Làm Cha Mẹ CZ">
+      </div>
+      <p>{% trans "Sign in" %}</p>
+    </header>
+    <form method="post" class="stack stack-md">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="flash flash--danger">{{ form.non_field_errors }}</div>
+      {% endif %}
+      <div class="form-group">
+        <label class="form-label" for="id_username">{% trans "Username" %}</label>
+        <input class="glass-input" type="text" id="id_username" name="username" required autofocus>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="id_password">{% trans "Password" %}</label>
+        <input class="glass-input" type="password" id="id_password" name="password" required>
+      </div>
+      <button class="btn btn--primary btn--block btn--lg" type="submit">{% trans "Sign in" %}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

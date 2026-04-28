@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Timetable" %}{% endblock %}
+{% block content %}
+<header class="row-flex-between section">
+  <div>
+    <h2 class="mb-1">{% trans "Timetable" %}</h2>
+    <p class="text-muted mb-1">{% trans "Weekly view of all active classes." %}</p>
+  </div>
+</header>
+
+<div class="timetable">
+  {% for code, label, slots in days %}
+    <div class="timetable-day" data-reveal data-reveal-group="days">
+      <div class="timetable-day__head">{{ label }}</div>
+      <div class="timetable-day__body">
+        {% for s in slots %}
+          <a href="{% url 'class_calendar' s.cls.pk %}" class="timetable-slot">
+            <div class="timetable-slot__subject">{{ s.cls.subject }}</div>
+            <div class="timetable-slot__code">{{ s.cls.code }}</div>
+            <div class="timetable-slot__time">{{ s.time.time_start|time:"H:i" }} – {{ s.time.time_end|time:"H:i" }}</div>
+          </a>
+        {% empty %}
+          <div class="timetable-day__empty">{% trans "no lessons" %}</div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

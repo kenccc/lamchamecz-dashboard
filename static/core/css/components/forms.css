@@ -1,0 +1,128 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.form-label {
+  font-family: var(--sans);
+  font-size: var(--fs-13);
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.glass-input,
+.form-control,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="time"],
+input[type="search"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: var(--sans);
+  font-size: var(--fs-15);
+  font-weight: 400;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border-alt);
+  border-radius: var(--radius-md);
+  backdrop-filter: var(--blur-soft);
+  -webkit-backdrop-filter: var(--blur-soft);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition),
+    background var(--transition);
+  box-shadow: var(--inner-highlight);
+}
+
+textarea {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.glass-input::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-soft);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.glass-input:hover,
+.form-control:hover,
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--border-warm);
+}
+
+.glass-input:focus,
+.form-control:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent);
+  background: var(--surface-strong);
+  box-shadow: 0 0 0 3px var(--accent-glow), var(--inner-highlight);
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236f5a48' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-check-input,
+input[type="checkbox"],
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.form-text {
+  font-size: var(--fs-13);
+  color: var(--text-muted);
+}
+
+.form-error {
+  font-size: var(--fs-13);
+  color: var(--danger);
+  font-weight: 500;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.form-card {
+  padding: 32px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: var(--shadow-lg), var(--inner-highlight-strong);
+}

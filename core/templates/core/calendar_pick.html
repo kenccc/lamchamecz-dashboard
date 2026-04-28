@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Class calendar" %}{% endblock %}
+{% block content %}
+<header class="section">
+  <h2 class="mb-1">{% trans "Pick a class" %}</h2>
+  <p class="text-muted">{% trans "Opens the calendar for the selected class." %}</p>
+</header>
+
+<div class="list-stack">
+  {% for cls in classes %}
+    <a class="list-row" href="{% url 'class_calendar' cls.pk %}" data-reveal data-reveal-group="picks">
+      <span><strong>{{ cls.code }}</strong> – {{ cls.subject }}</span>
+      <span class="text-muted text-small">{{ cls.date_start }} → {{ cls.date_end }}</span>
+    </a>
+  {% empty %}
+    <div class="text-muted">{% trans "No classes." %}</div>
+  {% endfor %}
+</div>
+{% endblock %}

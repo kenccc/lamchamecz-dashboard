@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Enrollments" %}{% endblock %}
+{% block content %}
+<header class="row-flex-between section">
+  <div>
+    <h2 class="mb-1">{% trans "Enrollments" %}</h2>
+    <p class="text-muted mb-1">{% trans "Student → class link." %}</p>
+  </div>
+  <a class="btn btn--primary" href="{% url 'enrollment_create' %}">+ {% trans "Add enrollment" %}</a>
+</header>
+
+<div class="table-wrap" data-reveal>
+  <div class="table-scroll">
+    <table class="glass-table">
+      <thead>
+        <tr>
+          <th>#</th><th>{% trans "Student" %}</th><th>{% trans "Class" %}</th><th>{% trans "Subject" %}</th>
+          <th>{% trans "Actual lessons" %}</th><th>{% trans "Note" %}</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+          <tr>
+            <td class="cell-num">{{ forloop.counter }}</td>
+            <td class="fw-medium">{{ r.student.name }}</td>
+            <td>{{ r.classroom.code }}</td>
+            <td>{{ r.classroom.subject }}</td>
+            <td class="cell-num">{{ r.actual_lessons }}</td>
+            <td>{{ r.note }}</td>
+            <td>
+              <div class="cell-actions">
+                <form method="post" action="{% url 'enrollment_delete' r.pk %}"
+                      data-confirm="{% trans 'Remove enrollment?' %}">
+                  {% csrf_token %}
+                  <button class="btn btn--danger btn--sm" type="submit">{% trans "Remove" %}</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        {% empty %}
+          <tr class="empty-row"><td colspan="7">{% trans "No enrollments." %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

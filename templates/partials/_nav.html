@@ -1,0 +1,29 @@
+{% load i18n static %}
+{% if user.is_authenticated %}
+<nav class="glass-nav" aria-label="{% trans 'Main navigation' %}">
+  <a class="glass-nav__brand" href="{% url 'dashboard' %}" aria-label="Làm Cha Mẹ CZ">
+    <img class="glass-nav__logo" src="{% static 'core/img/logo.png' %}" alt="Làm Cha Mẹ CZ">
+  </a>
+  <button class="glass-nav__toggle" type="button" data-nav-toggle aria-label="{% trans 'Menu' %}">
+    <span></span>
+  </button>
+  <ul class="glass-nav__menu" data-nav-menu>
+    <li><a class="glass-nav__link" href="{% url 'timetable' %}">{% trans "Timetable" %}</a></li>
+    <li><a class="glass-nav__link" href="{% url 'statistics' %}">{% trans "Statistics" %}</a></li>
+    <li><a class="glass-nav__link" href="{% url 'class_list' %}">{% trans "Classes" %}</a></li>
+    <li><a class="glass-nav__link" href="{% url 'student_list' %}">{% trans "Students" %}</a></li>
+    <li><a class="glass-nav__link" href="{% url 'enrollment_list' %}">{% trans "Enrollments" %}</a></li>
+    <li><a class="glass-nav__link" href="{% url 'calendar_pick' %}">{% trans "Calendar" %}</a></li>
+    {% if user.is_app_admin %}
+      <li><a class="glass-nav__link" href="{% url 'user_create' %}">{% trans "Users" %}</a></li>
+      <li><a class="glass-nav__link" href="/admin/">{% trans "Admin" %}</a></li>
+    {% endif %}
+  </ul>
+  {% include "partials/_lang_switch.html" %}
+  <span class="glass-nav__user">{{ user.display_name }}</span>
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button class="btn btn--ghost btn--sm" type="submit">{% trans "Logout" %}</button>
+  </form>
+</nav>
+{% endif %}

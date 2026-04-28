@@ -1,0 +1,79 @@
+.table-wrap {
+  background: var(--surface-strong);
+  border: 1px solid var(--border-alt);
+  border-radius: var(--radius-xl);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: var(--shadow-md), var(--inner-highlight-strong);
+  overflow: hidden;
+}
+
+.table-scroll { overflow-x: auto; }
+
+.glass-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--sans);
+  font-size: var(--fs-15);
+}
+
+.glass-table thead th {
+  text-align: left;
+  font-family: var(--sans);
+  font-size: var(--fs-13);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 16px 18px;
+  background: var(--surface-warm);
+  border-bottom: 1px solid var(--border-alt);
+  white-space: nowrap;
+}
+
+.glass-table tbody td {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border-alt);
+  vertical-align: middle;
+  color: var(--text);
+}
+
+.glass-table tbody tr:last-child td { border-bottom: none; }
+
+.glass-table tbody tr {
+  transition: background var(--transition);
+}
+
+.glass-table tbody tr:hover {
+  background: rgba(184, 90, 58, 0.06);
+}
+
+.glass-table .empty-row td {
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--fs-17);
+  padding: 40px;
+}
+
+.cell-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.cell-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-feature-settings: "tnum";
+}
+
+@media (max-width: 768px) {
+  .glass-table thead th,
+  .glass-table tbody td {
+    padding: 12px 12px;
+  }
+}

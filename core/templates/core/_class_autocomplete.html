@@ -1,0 +1,9 @@
+{% if classes %}
+<ul class="list-stack">
+  {% for c in classes %}
+    <li class="list-row" data-id="{{ c.pk }}">
+      <span><strong>{{ c.code }}</strong> – {{ c.subject }}</span>
+    </li>
+  {% endfor %}
+</ul>
+{% endif %}

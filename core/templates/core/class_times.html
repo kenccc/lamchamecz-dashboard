@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktrans with code=cls.code %}Schedule – {{ code }}{% endblocktrans %}{% endblock %}
+{% block content %}
+<header class="section">
+  <h2 class="mb-1">{% trans "Schedule" %}: {{ cls.code }} – {{ cls.subject }}</h2>
+  <p class="text-muted">{% trans "Set lesson times for this class." %}</p>
+</header>
+
+<form method="post" class="form-card">
+  {% csrf_token %}
+  {{ formset.management_form }}
+  <div class="table-scroll">
+    <table class="glass-table">
+      <thead>
+        <tr><th>#</th><th>{% trans "Day" %}</th><th>{% trans "Start" %}</th><th>{% trans "End" %}</th><th>{% trans "Delete" %}</th></tr>
+      </thead>
+      <tbody>
+        {% for f in formset %}
+          <tr>
+            <td class="cell-num">{{ forloop.counter }}</td>
+            <td>{{ f.weekday }}{{ f.id }}</td>
+            <td>{{ f.time_start }}</td>
+            <td>{{ f.time_end }}</td>
+            <td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="form-actions">
+    <button class="btn btn--primary" type="submit">{% trans "Save" %}</button>
+    <a class="btn btn--secondary" href="{% url 'class_list' %}">{% trans "Back" %}</a>
+  </div>
+</form>
+{% endblock %}

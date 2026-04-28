@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Dashboard" %}{% endblock %}
+{% block content %}
+<header class="section">
+  <h1>{% blocktrans with name=user.display_name %}Hello, {{ name }}.{% endblocktrans %}</h1>
+  <p class="text-muted">{% trans "LCM management overview. Choose an action below." %}</p>
+</header>
+<section class="grid grid-cards">
+  {% for label, url in cards %}
+    <a href="{{ url }}" class="tile" data-reveal data-reveal-group="tiles">{{ label }}</a>
+  {% endfor %}
+</section>
+{% endblock %}

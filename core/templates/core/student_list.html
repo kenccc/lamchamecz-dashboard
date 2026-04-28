@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Students" %}{% endblock %}
+{% block content %}
+<header class="row-flex-between section">
+  <div>
+    <h2 class="mb-1">{% trans "Students" %}</h2>
+    <p class="text-muted mb-1">{% trans "List of all students in the system." %}</p>
+  </div>
+  <a class="btn btn--primary" href="{% url 'student_create' %}">+ {% trans "Add student" %}</a>
+</header>
+
+<div class="table-wrap" data-reveal>
+  <div class="table-scroll">
+    <table class="glass-table">
+      <thead>
+        <tr>
+          <th>#</th><th>{% trans "Birth no./VS" %}</th><th>{% trans "Name" %}</th>
+          <th>{% trans "Birth year" %}</th><th>{% trans "Class" %}</th><th>{% trans "Contact" %}</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in students %}
+          <tr>
+            <td class="cell-num">{{ forloop.counter }}</td>
+            <td class="cell-num">{{ s.rodne_cislo }}</td>
+            <td class="fw-medium">{{ s.name }}</td>
+            <td class="cell-num">{{ s.birth_year|default_if_none:"" }}</td>
+            <td>{{ s.school_class }}</td>
+            <td>{{ s.contact }}</td>
+            <td>
+              <div class="cell-actions">
+                <a class="btn btn--secondary btn--sm" href="{% url 'student_edit' s.pk %}">{% trans "Edit" %}</a>
+                <a class="btn btn--secondary btn--sm" href="{% url 'enrollment_create_for_student' s.pk %}">{% trans "To class" %}</a>
+                {% if user.is_app_admin %}
+                  <form method="post" action="{% url 'student_delete' s.pk %}"
+                        data-confirm="{% trans 'Really delete this student?' %}">
+                    {% csrf_token %}
+                    <button class="btn btn--danger btn--sm" type="submit">{% trans "Delete" %}</button>
+                  </form>
+                {% endif %}
+              </div>
+            </td>
+          </tr>
+        {% empty %}
+          <tr class="empty-row"><td colspan="7">{% trans "No students." %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Classes" %}{% endblock %}
+{% block content %}
+<header class="row-flex-between section">
+  <div>
+    <h2 class="mb-1">{% trans "Class manager" %}</h2>
+    <p class="text-muted mb-1">{% trans "Overview of all classes, their schedules and revenue." %}</p>
+  </div>
+  <a href="{% url 'class_create' %}" class="btn btn--primary">+ {% trans "Create class" %}</a>
+</header>
+
+<div class="table-wrap" data-reveal>
+  <div class="table-scroll">
+    <table class="glass-table">
+      <thead>
+        <tr>
+          <th>#</th><th>{% trans "Code" %}</th><th>{% trans "Subject" %}</th><th>{% trans "Lessons" %}</th><th>{% trans "Length" %}</th>
+          <th>{% trans "Price" %}</th><th>{% trans "Students" %}</th><th>{% trans "Revenue" %}</th><th>{% trans "From" %}</th><th>{% trans "To" %}</th>
+          <th>{% trans "Status" %}</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+          <tr>
+            <td class="cell-num">{{ forloop.counter }}</td>
+            <td class="fw-medium">{{ r.cls.code }}</td>
+            <td>{{ r.cls.subject }}</td>
+            <td class="cell-num">{{ r.cls.total_lessons }}</td>
+            <td class="cell-num">{{ r.cls.minutes_per_lesson }} {% trans "min" %}</td>
+            <td class="cell-num">{{ r.cls.fee_per_lesson }} {% trans "CZK" %}</td>
+            <td class="cell-num">{{ r.cls.student_count }}</td>
+            <td class="cell-num">{{ r.fee|floatformat:0 }} {% trans "CZK" %}</td>
+            <td class="cell-num">{{ r.cls.date_start }}</td>
+            <td class="cell-num">{{ r.cls.date_end }}</td>
+            <td>
+              {% if r.cls.is_closed %}
+                <span class="badge badge--muted badge--dot">{% trans "Closed" %}</span>
+              {% else %}
+                <form method="post" action="{% url 'class_close' r.cls.pk %}"
+                      data-confirm="{% blocktrans with code=r.cls.code %}Close class {{ code }}?{% endblocktrans %}">
+                  {% csrf_token %}
+                  <button class="btn btn--warning btn--sm" type="submit">{% trans "Close" %}</button>
+                </form>
+              {% endif %}
+            </td>
+            <td>
+              <div class="cell-actions">
+                <a class="btn btn--secondary btn--sm" href="{% url 'class_edit' r.cls.pk %}">{% trans "Edit" %}</a>
+                <a class="btn btn--secondary btn--sm" href="{% url 'class_times' r.cls.pk %}">{% trans "Times" %}</a>
+                <a class="btn btn--secondary btn--sm" href="{% url 'class_calendar' r.cls.pk %}">{% trans "Calendar" %}</a>
+              </div>
+            </td>
+          </tr>
+        {% empty %}
+          <tr class="empty-row"><td colspan="12">{% trans "No classes." %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

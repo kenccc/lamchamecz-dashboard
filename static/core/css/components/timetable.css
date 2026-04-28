@@ -1,0 +1,99 @@
+.timetable {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 992px) {
+  .timetable { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .timetable { grid-template-columns: 1fr; }
+}
+
+.timetable-day {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-strong);
+  border: 1px solid var(--border-alt);
+  border-radius: var(--radius-lg);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: var(--shadow-sm), var(--inner-highlight);
+  overflow: hidden;
+}
+
+.timetable-day__head {
+  padding: 14px 14px;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: var(--fs-13);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  background: var(--surface-warm);
+  border-bottom: 1px solid var(--border-alt);
+}
+
+.timetable-day__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  flex: 1;
+}
+
+.timetable-slot {
+  display: block;
+  padding: 12px 14px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border-alt);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  text-decoration: none;
+  transition: transform var(--transition), box-shadow var(--transition),
+    border-color var(--transition);
+}
+
+.timetable-slot:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-warm);
+  box-shadow: var(--shadow-md), var(--inner-highlight);
+  color: var(--text);
+}
+
+.timetable-slot__subject {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.008em;
+  font-size: var(--fs-17);
+  color: var(--text);
+}
+
+.timetable-slot__code {
+  font-family: var(--sans);
+  font-size: var(--fs-13);
+  color: var(--text-muted);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+.timetable-slot__time {
+  font-family: var(--sans);
+  font-size: var(--fs-13);
+  color: var(--accent-deep);
+  font-weight: 600;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.timetable-day__empty {
+  font-family: var(--serif);
+  font-size: var(--fs-15);
+  color: var(--text-soft);
+  text-align: center;
+  padding: 16px 0;
+  font-style: italic;
+}
