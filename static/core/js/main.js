@@ -75,10 +75,34 @@
     nodes.forEach(function (el) { io.observe(el); });
   }
 
+  function initFormsetAdd() {
+    document.querySelectorAll("[data-formset-add]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var prefix = btn.getAttribute("data-prefix");
+        var templateId = btn.getAttribute("data-template-id");
+        var tmpl = document.getElementById(templateId);
+        var tbody = document.getElementById("formset-body");
+        var totalInput = document.querySelector("[name=" + prefix + "-TOTAL_FORMS]");
+        if (!tmpl || !tbody || !totalInput) return;
+
+        var total = parseInt(totalInput.value, 10);
+        var html = tmpl.innerHTML.replace(/__prefix__/g, total);
+        var tmp = document.createElement("tbody");
+        tmp.innerHTML = html;
+        var row = tmp.firstElementChild;
+        var numCell = row.querySelector(".formset-row-num");
+        if (numCell) numCell.textContent = total + 1;
+        tbody.appendChild(row);
+        totalInput.value = total + 1;
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initNav();
     initFlash();
     initConfirm();
     initReveal();
+    initFormsetAdd();
   });
 })();
