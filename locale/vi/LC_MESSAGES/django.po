@@ -541,3 +541,27 @@ msgstr "Tên đăng nhập"
 #: templates/registration/login.html:23
 msgid "Password"
 msgstr "Mật khẩu"
+
+#: core/templates/core/class_calendar.html
+msgid "Download calendar image"
+msgstr "Tải ảnh lịch"
+
+#: core/views.py
+msgid "Total price:"
+msgstr "Tổng tiền:"
+
+#: core/views.py
+msgid "lessons"
+msgstr "buổi"
+
+#: core/templates/core/class_calendar.html
+msgid "Date range"
+msgstr "Khoảng thời gian"
+
+#: core/templates/core/class_calendar.html
+msgid "Apply"
+msgstr "Áp dụng"
+
+#: core/templates/core/class_calendar.html
+msgid "Reset"
+msgstr "Đặt lại"

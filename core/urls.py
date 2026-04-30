@@ -16,6 +16,7 @@ urlpatterns = [
     path("classes/<int:pk>/times/", views.class_times, name="class_times"),
     path("classes/<int:pk>/close/", views.class_close, name="class_close"),
     path("classes/<int:pk>/calendar/", views.class_calendar, name="class_calendar"),
+    path("classes/<int:pk>/calendar/download/", views.calendar_download, name="calendar_download"),
     path("calendar/", views.calendar_pick, name="calendar_pick"),
     path("dayoff/<int:pk>/remove/", views.dayoff_remove, name="dayoff_remove"),
 

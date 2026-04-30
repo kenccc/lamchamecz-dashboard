@@ -542,3 +542,27 @@ msgstr "Uživatelské jméno"
 #: templates/registration/login.html:23
 msgid "Password"
 msgstr "Heslo"
+
+#: core/templates/core/class_calendar.html
+msgid "Download calendar image"
+msgstr "Stáhnout obrázek kalendáře"
+
+#: core/views.py
+msgid "Total price:"
+msgstr "Celková cena:"
+
+#: core/views.py
+msgid "lessons"
+msgstr "lekcí"
+
+#: core/templates/core/class_calendar.html
+msgid "Date range"
+msgstr "Rozsah dat"
+
+#: core/templates/core/class_calendar.html
+msgid "Apply"
+msgstr "Použít"
+
+#: core/templates/core/class_calendar.html
+msgid "Reset"
+msgstr "Resetovat"

@@ -541,3 +541,27 @@ msgstr "Username"
 #: templates/registration/login.html:23
 msgid "Password"
 msgstr "Password"
+
+#: core/templates/core/class_calendar.html
+msgid "Download calendar image"
+msgstr "Download calendar image"
+
+#: core/views.py
+msgid "Total price:"
+msgstr "Total price:"
+
+#: core/views.py
+msgid "lessons"
+msgstr "lessons"
+
+#: core/templates/core/class_calendar.html
+msgid "Date range"
+msgstr "Date range"
+
+#: core/templates/core/class_calendar.html
+msgid "Apply"
+msgstr "Apply"
+
+#: core/templates/core/class_calendar.html
+msgid "Reset"
+msgstr "Reset"

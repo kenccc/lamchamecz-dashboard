@@ -6,7 +6,11 @@ from django.utils.formats import date_format
 from .models import WEEKDAY_ISO, ClassRoom
 
 
-def working_days(classroom: ClassRoom) -> list[date]:
+def working_days(
+    classroom: ClassRoom,
+    date_start: date | None = None,
+    date_end: date | None = None,
+) -> list[date]:
     """Compute list of class session dates respecting weekdays + day-offs."""
     weekdays = {
         iso for iso in (WEEKDAY_ISO.get(t.weekday) for t in classroom.times.all()) if iso
@@ -15,12 +19,14 @@ def working_days(classroom: ClassRoom) -> list[date]:
         return []
     holidays = {d.date for d in classroom.days_off.all()}
     out: list[date] = []
-    cur = classroom.date_start
-    while cur <= classroom.date_end:
+    cur = date_start or classroom.date_start
+    end = date_end or classroom.date_end
+    while cur <= end:
         if cur.isoweekday() in weekdays and cur not in holidays:
             out.append(cur)
         cur += timedelta(days=1)
     return out
+
 
 
 def working_days_by_month(dates: list[date]) -> list[tuple[str, list[date]]]:

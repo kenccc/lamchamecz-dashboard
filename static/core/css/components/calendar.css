@@ -113,3 +113,29 @@
   box-shadow: var(--shadow-md), var(--inner-highlight);
   color: var(--text);
 }
+
+.range-picker__fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 16px;
+}
+
+.range-picker__fields .form-group {
+  flex: 1 1 140px;
+  margin-bottom: 0;
+}
+
+.range-picker__sep {
+  padding-bottom: 14px;
+  color: var(--text-soft);
+  font-size: var(--fs-15);
+}
+
+.range-picker__actions {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  padding-bottom: 2px;
+}

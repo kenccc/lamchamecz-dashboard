@@ -8,7 +8,33 @@
     {% trans "Planned lessons:" %} <strong>{{ session_count }}</strong> ·
     {{ cls.date_start }} → {{ cls.date_end }}
   </p>
+  <a href="{% url 'calendar_download' cls.pk %}?date_from={{ range_start }}&date_to={{ range_end }}" class="btn btn--primary btn--sm">
+    ↓ {% trans "Download calendar image" %}
+  </a>
 </header>
+
+<form method="get" class="range-picker glass-card mb-3">
+  <div class="glass-card__header">{% trans "Date range" %}</div>
+  <div class="range-picker__fields">
+    <div class="form-group">
+      <label class="form-label" for="id_date_from">{% trans "From" %}</label>
+      <input type="date" id="id_date_from" name="date_from" value="{{ range_start }}"
+             min="{{ cls_date_start }}" max="{{ cls_date_end }}" class="glass-input">
+    </div>
+    <div class="range-picker__sep">→</div>
+    <div class="form-group">
+      <label class="form-label" for="id_date_to">{% trans "To" %}</label>
+      <input type="date" id="id_date_to" name="date_to" value="{{ range_end }}"
+             min="{{ cls_date_start }}" max="{{ cls_date_end }}" class="glass-input">
+    </div>
+    <div class="range-picker__actions">
+      <button type="submit" class="btn btn--primary btn--sm">{% trans "Apply" %}</button>
+      {% if is_filtered %}
+        <a href="{% url 'class_calendar' cls.pk %}" class="btn btn--ghost btn--sm">{% trans "Reset" %}</a>
+      {% endif %}
+    </div>
+  </div>
+</form>
 
 <div class="calendar-layout">
   <section class="glass-card">

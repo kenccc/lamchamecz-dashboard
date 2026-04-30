@@ -1,4 +1,7 @@
+import io
+import math
 from collections import OrderedDict
+from datetime import date as date_type
 from decimal import Decimal
 
 from django.contrib import messages
@@ -7,11 +10,12 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import transaction
 from django.db.models import Count, Q, Sum
-from django.http import HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_POST
+from PIL import Image, ImageDraw, ImageFont
 
 from .forms import (
     ClassRoomForm,
@@ -34,6 +38,111 @@ from .models import (
     Weekday,
 )
 from .services import working_days, working_days_by_month
+
+
+_FONT_PATHS = {
+    "regular": [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+        "/System/Library/Fonts/Helvetica.ttc",
+    ],
+    "bold": [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        "/System/Library/Fonts/Helvetica.ttc",
+    ],
+}
+
+
+def _load_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    for path in _FONT_PATHS["bold" if bold else "regular"]:
+        try:
+            return ImageFont.truetype(path, size)
+        except (IOError, OSError):
+            continue
+    return ImageFont.load_default()
+
+
+def _fmt_czk(val: Decimal) -> str:
+    n = int(val) if val == val.to_integral_value() else val
+    return f"{n:,}".replace(",", " ")
+
+
+def _build_calendar_image(
+    cls, months, session_count: int, total_fee: Decimal,
+    label_price: str, label_lessons: str,
+) -> Image.Image:
+    COLS = 3
+    IMG_W = 960
+    MARGIN = 40
+    GAP = 14
+    MONTH_HDR_H = 34
+    DATE_LINE_H = 22
+    CELL_PAD = 10
+    TITLE_H = 88
+    PRICE_BOX_H = 72
+
+    font_title = _load_font(24, bold=True)
+    font_sub = _load_font(13)
+    font_month = _load_font(14, bold=True)
+    font_date = _load_font(13)
+    font_formula = _load_font(20, bold=True)
+    font_formula_label = _load_font(12)
+
+    max_dates = max((len(d) for _, d in months), default=0)
+    card_h = MONTH_HDR_H + CELL_PAD + max_dates * DATE_LINE_H + CELL_PAD
+    col_w = (IMG_W - 2 * MARGIN - (COLS - 1) * GAP) // COLS
+    n_rows = math.ceil(len(months) / COLS) if months else 1
+
+    img_h = MARGIN + TITLE_H + n_rows * card_h + (n_rows - 1) * GAP + GAP + PRICE_BOX_H + MARGIN
+
+    BG = (246, 248, 252)
+    CARD_BG = (255, 255, 255)
+    CARD_BORDER = (203, 213, 225)
+    HDR_BG = (29, 78, 216)
+    HDR_FG = (255, 255, 255)
+    DATE_FG = (30, 41, 59)
+    TITLE_FG = (15, 23, 42)
+    SUB_FG = (100, 116, 139)
+    PRICE_BG = (239, 246, 255)
+    PRICE_BORDER = (147, 197, 253)
+    PRICE_FG = (29, 78, 216)
+    PRICE_LABEL_FG = (71, 85, 105)
+
+    img = Image.new("RGB", (IMG_W, img_h), BG)
+    draw = ImageDraw.Draw(img)
+
+    draw.text((MARGIN, MARGIN), f"{cls.code} – {cls.subject}", fill=TITLE_FG, font=font_title)
+    draw.text(
+        (MARGIN, MARGIN + 34),
+        f"{cls.date_start.strftime('%d.%m.%Y')} → {cls.date_end.strftime('%d.%m.%Y')}  ·  {session_count} {label_lessons}",
+        fill=SUB_FG,
+        font=font_sub,
+    )
+
+    grid_top = MARGIN + TITLE_H
+    for i, (month_name, dates) in enumerate(months):
+        col = i % COLS
+        row = i // COLS
+        x = MARGIN + col * (col_w + GAP)
+        y = grid_top + row * (card_h + GAP)
+
+        draw.rectangle([x, y, x + col_w, y + card_h], fill=CARD_BG, outline=CARD_BORDER, width=1)
+        draw.rectangle([x, y, x + col_w, y + MONTH_HDR_H], fill=HDR_BG)
+        draw.text((x + CELL_PAD, y + (MONTH_HDR_H - 14) // 2), month_name, fill=HDR_FG, font=font_month)
+
+        for j, d in enumerate(dates):
+            dy = y + MONTH_HDR_H + CELL_PAD + j * DATE_LINE_H
+            draw.text((x + CELL_PAD, dy), d.strftime("%d.%m.%Y"), fill=DATE_FG, font=font_date)
+
+    price_y = grid_top + n_rows * card_h + (n_rows - 1) * GAP + GAP
+    draw.rectangle([MARGIN, price_y, IMG_W - MARGIN, price_y + PRICE_BOX_H], fill=PRICE_BG, outline=PRICE_BORDER, width=1)
+
+    formula = f"{session_count} × {_fmt_czk(cls.fee_per_lesson)} = {_fmt_czk(total_fee)} CZK"
+    draw.text((MARGIN + 16, price_y + 10), label_price, fill=PRICE_LABEL_FG, font=font_formula_label)
+    draw.text((MARGIN + 16, price_y + 26), formula, fill=PRICE_FG, font=font_formula)
+
+    return img
 
 
 def _is_admin(u) -> bool:
@@ -221,7 +330,22 @@ def class_calendar(request, pk: int):
         messages.success(request, _("Day off added."))
         return redirect("class_calendar", pk=pk)
 
-    days = working_days(cls)
+    def _parse_date(param):
+        try:
+            return date_type.fromisoformat(request.GET[param])
+        except (KeyError, ValueError):
+            return None
+
+    range_start = _parse_date("date_from")
+    range_end = _parse_date("date_to")
+    if range_start and range_start < cls.date_start:
+        range_start = cls.date_start
+    if range_end and range_end > cls.date_end:
+        range_end = cls.date_end
+    if range_start and range_end and range_start > range_end:
+        range_start, range_end = None, None
+
+    days = working_days(cls, date_start=range_start, date_end=range_end)
     months = working_days_by_month(days)
     return render(request, "core/class_calendar.html", {
         "cls": cls,
@@ -229,7 +353,46 @@ def class_calendar(request, pk: int):
         "days_off": cls.days_off.all(),
         "form": form,
         "session_count": len(days),
+        "range_start": (range_start or cls.date_start).isoformat(),
+        "range_end": (range_end or cls.date_end).isoformat(),
+        "cls_date_start": cls.date_start.isoformat(),
+        "cls_date_end": cls.date_end.isoformat(),
+        "is_filtered": bool(range_start or range_end),
     })
+
+
+@login_required
+def calendar_download(request, pk: int):
+    cls = get_object_or_404(ClassRoom, pk=pk)
+    if not request.user.is_app_admin and cls.teacher_id != request.user.id:
+        return HttpResponseForbidden()
+
+    def _parse_date(param):
+        try:
+            return date_type.fromisoformat(request.GET[param])
+        except (KeyError, ValueError):
+            return None
+
+    range_start = _parse_date("date_from")
+    range_end = _parse_date("date_to")
+    days = working_days(cls, date_start=range_start, date_end=range_end)
+    months = working_days_by_month(days)
+    session_count = len(days)
+    total_fee = cls.fee_per_lesson * Decimal(session_count)
+
+    img = _build_calendar_image(
+        cls, months, session_count, total_fee,
+        label_price=str(_("Total price:")),
+        label_lessons=str(_("lessons")),
+    )
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    buf.seek(0)
+
+    safe_code = "".join(c if c.isalnum() or c in "-_" else "_" for c in cls.code)
+    response = HttpResponse(buf.read(), content_type="image/png")
+    response["Content-Disposition"] = f'attachment; filename="calendar_{safe_code}.png"'
+    return response
 
 
 @login_required
