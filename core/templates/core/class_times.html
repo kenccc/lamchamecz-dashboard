@@ -22,7 +22,12 @@
             <td>{{ f.weekday }}{{ f.id }}</td>
             <td>{{ f.time_start }}</td>
             <td>{{ f.time_end }}</td>
-            <td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>
+            <td>
+              {% if f.instance.pk %}
+                <span style="display:none">{{ f.DELETE }}</span>
+                <button type="button" class="btn btn--danger btn--sm" data-delete-row>✕</button>
+              {% endif %}
+            </td>
           </tr>
         {% endfor %}
       </tbody>
@@ -45,7 +50,7 @@
     <td>{{ ef.weekday }}{{ ef.id }}</td>
     <td>{{ ef.time_start }}</td>
     <td>{{ ef.time_end }}</td>
-    <td></td>
+    <td><button type="button" class="btn btn--danger btn--sm" data-delete-row>✕</button></td>
   </tr>
 </template>
 {% endwith %}

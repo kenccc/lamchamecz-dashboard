@@ -75,6 +75,28 @@
     nodes.forEach(function (el) { io.observe(el); });
   }
 
+  function initFormsetDelete() {
+    document.getElementById("formset-body") && document.getElementById("formset-body").addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-delete-row]");
+      if (!btn) return;
+      var row = btn.closest("tr");
+      if (!row) return;
+      var deleteCheckbox = row.querySelector("input[type=checkbox]");
+      if (deleteCheckbox) {
+        deleteCheckbox.checked = true;
+        row.style.opacity = "0.4";
+        btn.disabled = true;
+      } else {
+        var tbody = row.parentElement;
+        var prefix = document.querySelector("[data-formset-add]");
+        var prefixName = prefix && prefix.getAttribute("data-prefix");
+        var totalInput = prefixName && document.querySelector("[name=" + prefixName + "-TOTAL_FORMS]");
+        row.remove();
+        if (totalInput) totalInput.value = parseInt(totalInput.value, 10) - 1;
+      }
+    });
+  }
+
   function initFormsetAdd() {
     document.querySelectorAll("[data-formset-add]").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -104,5 +126,6 @@
     initConfirm();
     initReveal();
     initFormsetAdd();
+    initFormsetDelete();
   });
 })();
