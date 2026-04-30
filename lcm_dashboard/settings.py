@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 
+import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
@@ -81,16 +82,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "lcm_dashboard.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("POSTGRES_DB", "lcm"),
-        "USER": os.getenv("POSTGRES_USER", "lcm"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "lcm"),
-        "HOST": os.getenv("POSTGRES_HOST", "db"),
-        "PORT": os.getenv("POSTGRES_PORT", "5432"),
+_db_url = os.getenv("DATABASE_URL")
+if _db_url:
+    DATABASES = {"default": dj_database_url.parse(_db_url)}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("POSTGRES_DB", "lcm"),
+            "USER": os.getenv("POSTGRES_USER", "lcm"),
+            "PASSWORD": os.getenv("POSTGRES_PASSWORD", "lcm"),
+            "HOST": os.getenv("POSTGRES_HOST", "localhost"),
+            "PORT": os.getenv("POSTGRES_PORT", "5432"),
+        }
     }
-}
 
 AUTH_USER_MODEL = "core.User"
 
