@@ -2,12 +2,15 @@
 {% load i18n %}
 {% block title %}{% trans "Enrollments" %}{% endblock %}
 {% block content %}
-<header class="row-flex-between section">
+<header class="page-head">
   <div>
-    <h2 class="mb-1">{% trans "Enrollments" %}</h2>
-    <p class="text-muted mb-1">{% trans "Student → class link." %}</p>
+    <div class="page-head__crumbs"><span>{% trans "Enrollments" %}</span><span class="sep">/</span><span>{% trans "Manage" %}</span></div>
+    <h1 class="page-head__title">{% trans "Enrollments" %}</h1>
+    <p class="page-head__sub">{% trans "Student → class link." %}</p>
   </div>
-  <a class="btn btn--primary" href="{% url 'enrollment_create' %}">+ {% trans "Add enrollment" %}</a>
+  <div class="page-head__actions">
+    <a class="btn btn--primary" href="{% url 'enrollment_create' %}">+ {% trans "Add enrollment" %}</a>
+  </div>
 </header>
 
 <div class="table-wrap" data-reveal>

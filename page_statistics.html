@@ -1,0 +1,160 @@
+
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#faf3e6">
+<title>Làm Cha Mẹ CZ</title>
+<link rel="icon" type="image/png" href="http://127.0.0.1:8099/static/core/img/logo.png">
+<link rel="apple-touch-icon" href="http://127.0.0.1:8099/static/core/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="http://127.0.0.1:8099/static/core/css/main.css">
+
+
+</head>
+<body>
+  
+    <div class="app-shell">
+      
+
+<aside class="sidebar" aria-label="Hlavní navigace">
+  <div class="sidebar__top">
+    <a class="sidebar__brand" href="/" aria-label="Làm Cha Mẹ CZ">
+      <img class="sidebar__logo" src="http://127.0.0.1:8099/static/core/img/logo.png" alt="Làm Cha Mẹ CZ">
+    </a>
+    <button class="sidebar__toggle" type="button" data-nav-toggle aria-label="Menu">
+      <span></span>
+    </button>
+  </div>
+
+  <nav class="sidebar__nav" data-nav-menu>
+    <a class="glass-nav__link" href="/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      Přehled
+    </a>
+    <a class="glass-nav__link" href="/timetable/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      Rozvrh
+    </a>
+    <a class="glass-nav__link" href="/statistics/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
+      Statistiky
+    </a>
+    <a class="glass-nav__link" href="/classes/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>
+      Třídy
+    </a>
+    <a class="glass-nav__link" href="/students/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.8"/><path d="M18.5 19a5 5 0 0 0-3-4.6"/></svg>
+      Studenti
+    </a>
+    <a class="glass-nav__link" href="/enrollments/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>
+      Zápisy
+    </a>
+    <a class="glass-nav__link" href="/calendar/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><path d="M8 2.5v4"/><path d="M16 2.5v4"/></svg>
+      Kalendář
+    </a>
+    
+      <a class="glass-nav__link" href="/users/new/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.2"/><path d="M4 19a6 6 0 0 1 12 0"/><path d="M19 8v6"/><path d="M16 11h6"/></svg>
+        Uživatelé
+      </a>
+      <a class="glass-nav__link" href="/admin/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l8 3.5v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10v-5z"/></svg>
+        Admin
+      </a>
+    
+  </nav>
+
+  <div class="sidebar__foot">
+    <div class="sidebar__user">
+      <span class="sidebar__avatar">A</span>
+      <span>Admin Teacher</span>
+    </div>
+    <div class="sidebar__foot-row">
+      
+
+
+<form action="/i18n/setlang/" method="post" class="lang-switch">
+  <input type="hidden" name="csrfmiddlewaretoken" value="wssumnpxT8TerjsHIpJxZPEF0GJesJ44YQM2qkK3ojkDLewu7IzeKxnygrcM9Jlj">
+  <input name="next" type="hidden" value="/statistics/">
+  <select name="language" class="lang-switch__select" onchange="this.form.submit()" aria-label="Jazyk">
+    
+      <option value="cs" selected>CS</option>
+    
+      <option value="en" >EN</option>
+    
+      <option value="vi" >VI</option>
+    
+  </select>
+</form>
+
+      <form method="post" action="/logout/">
+        <input type="hidden" name="csrfmiddlewaretoken" value="wssumnpxT8TerjsHIpJxZPEF0GJesJ44YQM2qkK3ojkDLewu7IzeKxnygrcM9Jlj">
+        <button class="btn btn--ghost btn--sm" type="submit">Odhlásit</button>
+      </form>
+    </div>
+  </div>
+</aside>
+
+
+      <main class="app-main">
+        <div class="app-main__inner">
+          
+
+
+  
+        
+<header class="section">
+  <h1 class="mb-1">Statistiky</h1>
+  <p class="lede">System totals at a glance.</p>
+</header>
+<section class="grid grid-stats">
+  <div class="stat-card stat-card--blue" data-reveal data-reveal-group="stats">
+    <div class="stat-card__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>
+    </div>
+    <div class="stat-card__value">2</div>
+    <div class="stat-card__label">Třídy</div>
+  </div>
+  <div class="stat-card stat-card--teal" data-reveal data-reveal-group="stats">
+    <div class="stat-card__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>
+    </div>
+    <div class="stat-card__value">1</div>
+    <div class="stat-card__label">Učitelé</div>
+  </div>
+  <div class="stat-card stat-card--purple" data-reveal data-reveal-group="stats">
+    <div class="stat-card__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.8"/><path d="M18.5 19a5 5 0 0 0-3-4.6"/></svg>
+    </div>
+    <div class="stat-card__value">0</div>
+    <div class="stat-card__label">Asistenti</div>
+  </div>
+  <div class="stat-card stat-card--orange" data-reveal data-reveal-group="stats">
+    <div class="stat-card__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    </div>
+    <div class="stat-card__value">5</div>
+    <div class="stat-card__label">Studenti</div>
+  </div>
+</section>
+
+  
+        </div>
+      </main>
+    </div>
+  
+  
+<script src="http://127.0.0.1:8099/static/core/js/main.js" defer></script>
+
+
+</body>
+</html>

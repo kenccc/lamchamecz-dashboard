@@ -1,99 +1,136 @@
-.timetable {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 14px;
-}
-
-@media (max-width: 992px) {
-  .timetable { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 560px) {
-  .timetable { grid-template-columns: 1fr; }
-}
-
-.timetable-day {
-  display: flex;
-  flex-direction: column;
-  background: var(--surface-strong);
-  border: 1px solid var(--border-alt);
-  border-radius: var(--radius-lg);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  box-shadow: var(--shadow-sm), var(--inner-highlight);
+/* ── Weekly timetable — Google-calendar-style time grid ───────────────────
+   80px time axis + 7 day columns; lessons absolutely positioned by clock. */
+.cal-grid {
+  --axis-w: 72px;
+  padding: 0;
   overflow: hidden;
 }
 
-.timetable-day__head {
-  padding: 14px 14px;
+/* Internal scroll so the full day is reachable without the page running long. */
+.cal-grid__scroll {
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.cal-grid__head,
+.cal-grid__body {
+  display: grid;
+  grid-template-columns: var(--axis-w) repeat(7, minmax(0, 1fr));
+}
+
+.cal-grid__head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-soft);
+}
+
+.cal-grid__corner { border-right: 1px solid var(--border); }
+
+.cal-grid__day {
+  padding: 12px 8px;
   text-align: center;
   font-family: var(--sans);
   font-size: var(--fs-13);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
-  background: var(--surface-warm);
-  border-bottom: 1px solid var(--border-alt);
+  border-right: 1px solid var(--border);
 }
+.cal-grid__day:last-child { border-right: 0; }
+.cal-grid__day.is-today { color: #fff; background: var(--accent); }
 
-.timetable-day__body {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 12px;
-  flex: 1;
+/* ── Body: time axis ──────────────────────────────────────────────────── */
+.cal-grid__body { position: relative; }
+
+.cal-axis {
+  border-right: 1px solid var(--border);
+  background: var(--surface-soft);
 }
-
-.timetable-slot {
-  display: block;
-  padding: 12px 14px;
-  background: var(--surface-strong);
-  border: 1px solid var(--border-alt);
-  border-radius: var(--radius-md);
-  color: var(--text);
-  text-decoration: none;
-  transition: transform var(--transition), box-shadow var(--transition),
-    border-color var(--transition);
+.cal-axis__hour {
+  height: var(--hour-px);
+  position: relative;
 }
-
-.timetable-slot:hover {
-  transform: translateY(-1px);
-  border-color: var(--border-warm);
-  box-shadow: var(--shadow-md), var(--inner-highlight);
-  color: var(--text);
-}
-
-.timetable-slot__subject {
-  font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: -0.008em;
-  font-size: var(--fs-17);
-  color: var(--text);
-}
-
-.timetable-slot__code {
+.cal-axis__hour span {
+  position: absolute;
+  top: -8px;
+  right: 8px;
   font-family: var(--sans);
-  font-size: var(--fs-13);
-  color: var(--text-muted);
-  margin-top: 2px;
-  letter-spacing: 0.02em;
-}
-
-.timetable-slot__time {
-  font-family: var(--sans);
-  font-size: var(--fs-13);
-  color: var(--accent-deep);
+  font-size: 11px;
   font-weight: 600;
-  margin-top: 4px;
+  color: var(--text-soft);
   font-variant-numeric: tabular-nums;
 }
 
-.timetable-day__empty {
+/* ── Day columns + hour gridlines ─────────────────────────────────────── */
+.cal-col {
+  position: relative;
+  border-right: 1px solid var(--border);
+  background-image: linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 100% var(--hour-px);
+}
+.cal-col:last-child { border-right: 0; }
+.cal-col.is-today { background-color: var(--accent-soft); }
+
+/* ── Lesson blocks ────────────────────────────────────────────────────── */
+.cal-lesson {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 6px 9px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform var(--transition), box-shadow var(--transition),
+    border-color var(--transition);
+}
+.cal-lesson:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+  z-index: 5;
+  color: var(--text);
+}
+.cal-lesson__subject {
   font-family: var(--serif);
+  font-weight: 600;
   font-size: var(--fs-15);
-  color: var(--text-soft);
-  text-align: center;
-  padding: 16px 0;
-  font-style: italic;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cal-lesson__time {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.cal-lesson__meta {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* On narrow screens the grid scrolls horizontally rather than squashing. */
+@media (max-width: 768px) {
+  .cal-grid__scroll { overflow-x: auto; }
+  .cal-grid__head,
+  .cal-grid__body { min-width: 760px; }
 }

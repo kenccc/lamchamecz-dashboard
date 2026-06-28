@@ -1,13 +1,34 @@
+/* App shell: fixed sidebar + scrolling main. */
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: 100vh;
+}
+
+.app-main {
+  min-width: 0;
+  padding: var(--gutter);
+}
+
+.app-main__inner {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Auth screens have no sidebar. */
+.app-auth {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+}
+
 .container {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--gutter);
-}
-
-main.container {
-  padding-top: 32px;
-  padding-bottom: 64px;
 }
 
 .stack { display: flex; flex-direction: column; }
@@ -32,7 +53,7 @@ main.container {
 
 .grid {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .grid-cards {
@@ -40,11 +61,22 @@ main.container {
 }
 
 .grid-stats {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .grid-week {
   grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+/* Dashboard split: main column + side rail (mini calendar / schedule). */
+.grid-dash {
+  grid-template-columns: 1fr 340px;
+  align-items: start;
+  gap: 24px;
+}
+
+@media (max-width: 1100px) {
+  .grid-dash { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 992px) {
@@ -55,7 +87,7 @@ main.container {
   .grid-week { grid-template-columns: 1fr; }
 }
 
-.section { margin-bottom: 32px; }
+.section { margin-bottom: 28px; }
 .mb-1 { margin-bottom: 8px; }
 .mb-2 { margin-bottom: 16px; }
 .mb-3 { margin-bottom: 24px; }
@@ -73,4 +105,13 @@ main.container {
   background: var(--border-alt);
   margin: 24px 0;
   border: 0;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+  .app-main {
+    padding-top: 76px;
+  }
 }

@@ -2,19 +2,20 @@
 {% load i18n %}
 {% block title %}{% blocktrans with code=cls.code %}Calendar – {{ code }}{% endblocktrans %}{% endblock %}
 {% block content %}
-<header class="section">
-  <h2 class="mb-1">{% trans "Calendar" %}: {{ cls.code }} – {{ cls.subject }}</h2>
-  <p class="text-muted">
-    {% trans "Planned lessons:" %} <strong>{{ session_count }}</strong> ·
-    {{ cls.date_start }} → {{ cls.date_end }}
-  </p>
-  <a href="{% url 'calendar_download' cls.pk %}?date_from={{ range_start }}&date_to={{ range_end }}" class="btn btn--primary btn--sm">
-    ↓ {% trans "Download calendar image" %}
+<header class="row-flex-between section">
+  <div>
+    <h1 class="mb-1">{{ cls.code }} · {{ cls.subject }}</h1>
+    <p class="text-muted">
+      {% trans "Planned lessons:" %} <strong>{{ session_count }}</strong> ·
+      {{ cls.date_start }} → {{ cls.date_end }}
+    </p>
+  </div>
+  <a href="{% url 'calendar_download' cls.pk %}?date_from={{ range_start }}&date_to={{ range_end }}" class="btn btn--secondary btn--sm">
+    ↓ {% trans "Download image" %}
   </a>
 </header>
 
-<form method="get" class="range-picker glass-card mb-3">
-  <div class="glass-card__header">{% trans "Date range" %}</div>
+<form method="get" class="glass-card glass-card--compact mb-3">
   <div class="range-picker__fields">
     <div class="form-group">
       <label class="form-label" for="id_date_from">{% trans "From" %}</label>
@@ -37,23 +38,42 @@
 </form>
 
 <div class="calendar-layout">
-  <section class="glass-card">
-    <div class="glass-card__header">{% trans "Monthly overview" %}</div>
-    {% if months %}
-      <div class="calendar-grid">
-        {% for month_name, days in months %}
-          <div class="month-card" data-reveal data-reveal-group="months">
-            <div class="month-card__head">{{ month_name }}</div>
-            <ul class="month-card__list">
-              {% for d in days %}
-                <li>{{ d|date:"d/m/Y" }}</li>
+  <section>
+    {% if calendar_months %}
+      <div class="cal-months">
+        {% for month in calendar_months %}
+          <div class="cal-month" data-reveal data-reveal-group="months">
+            <div class="cal-month__head">
+              <span class="cal-month__title">{{ month.name }}</span>
+              <span class="cal-month__count">{{ month.lesson_count }} {% trans "lessons" %}</span>
+            </div>
+            <div class="cal-weekdays">
+              {% for wd in weekday_headers %}
+                <div class="cal-weekday">{{ wd }}</div>
               {% endfor %}
-            </ul>
+            </div>
+            {% for week in month.weeks %}
+              <div class="cal-week">
+                {% for cell in week %}
+                  <div class="cal-day{% if not cell.in_month %} cal-day--muted{% endif %}{% if cell.is_today %} cal-day--today{% endif %}{% if cell.is_lesson %} cal-day--lesson{% elif cell.is_dayoff and cell.in_month %} cal-day--dayoff{% endif %}">
+                    <span class="cal-day__num">{{ cell.day }}</span>
+                    {% if cell.is_lesson %}
+                      <span class="cal-event">{{ cls.code }}</span>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endfor %}
           </div>
         {% endfor %}
       </div>
+      <div class="cal-legend">
+        <span class="cal-legend__item"><span class="cal-legend__swatch cal-legend__swatch--lesson"></span>{% trans "Lesson" %}</span>
+        <span class="cal-legend__item"><span class="cal-legend__swatch cal-legend__swatch--dayoff"></span>{% trans "Day off" %}</span>
+        <span class="cal-legend__item"><span class="cal-legend__swatch cal-legend__swatch--today"></span>{% trans "Today" %}</span>
+      </div>
     {% else %}
-      <p class="text-muted">{% trans "No lessons in the given range." %}</p>
+      <div class="glass-card"><p class="text-muted" style="margin:0">{% trans "No lessons in the given range." %}</p></div>
     {% endif %}
   </section>
 
@@ -62,7 +82,7 @@
     <form method="post" class="stack stack-sm mb-3">
       {% csrf_token %}
       {{ form.date }}
-      <button class="btn btn--primary btn--sm" type="submit">+ {% trans "Add" %}</button>
+      <button class="btn btn--primary btn--sm btn--block" type="submit">+ {% trans "Add day off" %}</button>
     </form>
     <ul class="dayoff-list">
       {% for d in days_off %}
@@ -74,7 +94,7 @@
           </form>
         </li>
       {% empty %}
-        <li class="dayoff-empty">{% trans "None" %}</li>
+        <li class="dayoff-empty">{% trans "None yet." %}</li>
       {% endfor %}
     </ul>
   </aside>

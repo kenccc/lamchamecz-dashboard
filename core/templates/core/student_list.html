@@ -2,12 +2,15 @@
 {% load i18n %}
 {% block title %}{% trans "Students" %}{% endblock %}
 {% block content %}
-<header class="row-flex-between section">
+<header class="page-head">
   <div>
-    <h2 class="mb-1">{% trans "Students" %}</h2>
-    <p class="text-muted mb-1">{% trans "List of all students in the system." %}</p>
+    <div class="page-head__crumbs"><span>{% trans "Students" %}</span><span class="sep">/</span><span>{% trans "Directory" %}</span></div>
+    <h1 class="page-head__title">{% trans "Student management" %}</h1>
+    <p class="page-head__sub">{% blocktrans count counter=students|length %}{{ counter }} student enrolled at the centre.{% plural %}{{ counter }} students enrolled at the centre.{% endblocktrans %}</p>
   </div>
-  <a class="btn btn--primary" href="{% url 'student_create' %}">+ {% trans "Add student" %}</a>
+  <div class="page-head__actions">
+    <a class="btn btn--primary" href="{% url 'student_create' %}">+ {% trans "Add student" %}</a>
+  </div>
 </header>
 
 <div class="table-wrap" data-reveal>
@@ -15,19 +18,26 @@
     <table class="glass-table">
       <thead>
         <tr>
-          <th>#</th><th>{% trans "Birth no./VS" %}</th><th>{% trans "Name" %}</th>
-          <th>{% trans "Birth year" %}</th><th>{% trans "Class" %}</th><th>{% trans "Contact" %}</th><th></th>
+          <th>{% trans "Name" %}</th><th>{% trans "Birth year" %}</th><th>{% trans "Class" %}</th>
+          <th>{% trans "Contact" %}</th><th>{% trans "Note" %}</th><th></th>
         </tr>
       </thead>
       <tbody>
         {% for s in students %}
           <tr>
-            <td class="cell-num">{{ forloop.counter }}</td>
-            <td class="cell-num">{{ s.rodne_cislo }}</td>
-            <td class="fw-medium">{{ s.name }}</td>
-            <td class="cell-num">{{ s.birth_year|default_if_none:"" }}</td>
-            <td>{{ s.school_class }}</td>
-            <td>{{ s.contact }}</td>
+            <td>
+              <span class="id-cell">
+                <span class="id-avatar">{{ s.name|slice:":1"|upper }}</span>
+                <span>
+                  <span class="id-cell__name">{{ s.name }}</span>
+                  {% if s.rodne_cislo %}<br><span class="id-cell__sub">{{ s.rodne_cislo }}</span>{% endif %}
+                </span>
+              </span>
+            </td>
+            <td class="cell-num">{{ s.birth_year|default_if_none:"—" }}</td>
+            <td>{% if s.school_class %}<span class="badge badge--muted">{{ s.school_class }}</span>{% else %}<span class="text-soft">—</span>{% endif %}</td>
+            <td>{{ s.contact|default:"—" }}</td>
+            <td><span class="id-cell__sub">{{ s.note|default:"—" }}</span></td>
             <td>
               <div class="cell-actions">
                 <a class="btn btn--secondary btn--sm" href="{% url 'student_edit' s.pk %}">{% trans "Edit" %}</a>
@@ -43,7 +53,7 @@
             </td>
           </tr>
         {% empty %}
-          <tr class="empty-row"><td colspan="7">{% trans "No students." %}</td></tr>
+          <tr class="empty-row"><td colspan="6">{% trans "No students." %}</td></tr>
         {% endfor %}
       </tbody>
     </table>

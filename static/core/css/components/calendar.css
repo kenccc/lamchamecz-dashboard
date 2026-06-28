@@ -1,47 +1,172 @@
-.calendar-grid {
+/* ── Layout: calendar + side rail ─────────────────────────────────────── */
+.calendar-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
 }
 
-.month-card {
+@media (max-width: 992px) {
+  .calendar-layout { grid-template-columns: 1fr; }
+}
+
+/* ── Month grid (Google Calendar style) ───────────────────────────────── */
+.cal-months {
+  display: grid;
+  gap: 24px;
+}
+
+.cal-month {
   background: var(--surface-strong);
-  border: 1px solid var(--border-alt);
-  border-radius: var(--radius-lg);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  box-shadow: var(--shadow-sm), var(--inner-highlight);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
 
-.month-card__head {
-  padding: 14px 16px;
-  text-align: center;
+.cal-month__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cal-month__title {
   font-family: var(--serif);
-  font-weight: 400;
-  font-size: var(--fs-17);
-  letter-spacing: -0.005em;
+  font-weight: 600;
+  font-size: var(--fs-20);
   color: var(--text);
-  background: var(--surface-warm);
-  border-bottom: 1px solid var(--border-alt);
   text-transform: capitalize;
 }
 
-.month-card__list {
-  list-style: none;
-  margin: 0;
-  padding: 8px 0;
-}
-
-.month-card__list li {
-  padding: 5px 16px;
+.cal-month__count {
   font-family: var(--sans);
   font-size: var(--fs-13);
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-  color: var(--text-muted);
+  font-weight: 700;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
 }
 
+.cal-weekdays,
+.cal-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.cal-weekdays {
+  border-bottom: 1px solid var(--border);
+}
+
+.cal-weekday {
+  padding: 10px 8px;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: var(--fs-13);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
+}
+
+.cal-day {
+  position: relative;
+  min-height: 76px;
+  padding: 8px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-strong);
+}
+.cal-day:nth-child(7n) { border-right: 0; }
+.cal-week:last-child .cal-day { border-bottom: 0; }
+
+.cal-day__num {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  font-family: var(--sans);
+  font-size: var(--fs-13);
+  font-weight: 700;
+  color: var(--text-muted);
+  border-radius: var(--radius-pill);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Days outside the current month — dimmed. */
+.cal-day--muted { background: var(--surface-soft); }
+.cal-day--muted .cal-day__num { color: var(--text-soft); opacity: 0.55; }
+
+/* Today marker. */
+.cal-day--today .cal-day__num {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* A lesson day — soft tinted cell + event chip. */
+.cal-day--lesson { background: var(--accent-soft); }
+.cal-day--lesson .cal-day__num { color: var(--accent-deep); }
+
+.cal-event {
+  display: block;
+  margin-top: 6px;
+  padding: 3px 8px;
+  font-family: var(--sans);
+  font-size: var(--fs-13);
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border-radius: var(--radius-sm);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* A day off that falls on a class weekday — struck out. */
+.cal-day--dayoff { background: var(--danger-soft); }
+.cal-day--dayoff .cal-day__num {
+  color: var(--danger);
+  text-decoration: line-through;
+}
+
+.cal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+}
+.cal-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: var(--fs-13);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.cal-legend__swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+}
+.cal-legend__swatch--lesson { background: var(--accent); }
+.cal-legend__swatch--dayoff { background: var(--danger); }
+.cal-legend__swatch--today {
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+}
+
+@media (max-width: 560px) {
+  .cal-day { min-height: 56px; padding: 5px; }
+  .cal-event { font-size: 11px; padding: 2px 5px; }
+}
+
+/* ── Day-off side panel ───────────────────────────────────────────────── */
 .dayoff-list {
   list-style: none;
   margin: 0;
@@ -56,37 +181,27 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 10px 12px;
+  padding: 10px 14px;
   background: var(--surface-soft);
-  border: 1px solid var(--border-alt);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   font-family: var(--sans);
-  font-size: var(--fs-13);
+  font-size: var(--fs-15);
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
 .dayoff-empty {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: var(--fs-15);
   color: var(--text-soft);
-  font-style: italic;
 }
 
-.calendar-layout {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 24px;
-  align-items: start;
-}
-
-@media (max-width: 992px) {
-  .calendar-layout { grid-template-columns: 1fr; }
-}
-
+/* ── Class picker / generic list rows ─────────────────────────────────── */
 .list-stack {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .list-row {
@@ -94,13 +209,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 18px;
+  padding: 16px 20px;
   background: var(--surface-strong);
-  border: 1px solid var(--border-alt);
-  border-radius: var(--radius-md);
-  backdrop-filter: var(--blur-soft);
-  -webkit-backdrop-filter: var(--blur-soft);
-  box-shadow: var(--shadow-sm), var(--inner-highlight);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   text-decoration: none;
   color: var(--text);
   transition: transform var(--transition), border-color var(--transition),
@@ -108,34 +221,33 @@
 }
 
 .list-row:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   border-color: var(--border-warm);
-  box-shadow: var(--shadow-md), var(--inner-highlight);
+  box-shadow: var(--shadow-md);
   color: var(--text);
 }
 
+/* ── Date-range picker ────────────────────────────────────────────────── */
 .range-picker__fields {
   display: flex;
   align-items: flex-end;
   gap: 12px;
   flex-wrap: wrap;
-  padding: 16px;
 }
 
 .range-picker__fields .form-group {
-  flex: 1 1 140px;
+  flex: 1 1 150px;
   margin-bottom: 0;
 }
 
 .range-picker__sep {
   padding-bottom: 14px;
   color: var(--text-soft);
-  font-size: var(--fs-15);
+  font-size: var(--fs-17);
 }
 
 .range-picker__actions {
   display: flex;
   gap: 8px;
   align-items: flex-end;
-  padding-bottom: 2px;
 }

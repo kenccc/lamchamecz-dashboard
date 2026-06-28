@@ -22,19 +22,8 @@ body {
   background-size: cover;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "ss01", "cv11";
+  font-feature-settings: "cv05", "cv11";
   position: relative;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: var(--grain);
-  opacity: 0.35;
-  mix-blend-mode: multiply;
 }
 
 main.container,
@@ -43,47 +32,34 @@ nav.glass-nav {
   z-index: 1;
 }
 
-@supports not (backdrop-filter: blur(1px)) {
-  body {
-    background-color: var(--bg-deep);
-  }
-  .glass-card,
-  .glass-nav,
-  .glass-input,
-  .btn--secondary {
-    background-color: rgba(255, 250, 242, 0.94) !important;
-  }
-}
-
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0.5em;
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: -0.012em;
   color: var(--text);
-  font-feature-settings: "ss01", "ss02";
 }
 
 h1 {
   font-size: var(--fs-52);
-  line-height: 1.05;
-  font-weight: 400;
-  letter-spacing: -0.025em;
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 h2 {
   font-size: var(--fs-36);
   line-height: 1.15;
-  font-weight: 400;
-  letter-spacing: -0.018em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 h3 {
   font-size: var(--fs-26);
   line-height: 1.25;
-  font-weight: 400;
-  letter-spacing: -0.012em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
-h4 { font-size: var(--fs-20); line-height: 1.35; font-weight: 500; }
-h5 { font-size: var(--fs-17); line-height: 1.4; font-weight: 500; }
+h4 { font-size: var(--fs-20); line-height: 1.35; font-weight: 600; }
+h5 { font-size: var(--fs-17); line-height: 1.4; font-weight: 600; }
 h6 {
   font-size: var(--fs-13);
   line-height: 1.4;
@@ -131,7 +107,7 @@ small, .text-small {
 
 .text-serif {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: -0.012em;
 }
 
@@ -141,21 +117,20 @@ small, .text-small {
   display: inline-block;
   font-family: var(--sans);
   font-size: var(--fs-13);
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-deep);
+  color: var(--text-muted);
   margin-bottom: 8px;
 }
 
 .lede {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-weight: 400;
-  font-style: italic;
-  font-size: var(--fs-20);
-  line-height: 1.5;
+  font-size: var(--fs-17);
+  line-height: 1.6;
   color: var(--text-muted);
-  max-width: 56ch;
+  max-width: 60ch;
 }
 
 ::selection {

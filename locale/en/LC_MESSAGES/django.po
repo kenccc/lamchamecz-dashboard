@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lcm_dashboard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 21:02+0200\n"
+"POT-Creation-Date: 2026-06-28 15:34+0000\n"
 "PO-Revision-Date: 2026-04-28 00:00+0000\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -11,557 +11,532 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/forms.py:22
 msgid "Full name"
 msgstr "Full name"
 
-#: core/forms.py:23
 msgid "Role"
 msgstr "Role"
 
-#: core/models.py:7
+msgid "End date must be on or after start date."
+msgstr ""
+
+#, python-format
+msgid "Class span exceeds %(years)d years."
+msgstr ""
+
 msgid "Administrator"
 msgstr "Administrator"
 
-#: core/models.py:8 core/models.py:48
 msgid "Teacher"
 msgstr "Teacher"
 
-#: core/models.py:9 core/models.py:52
 msgid "Assistant"
 msgstr "Assistant"
 
-#: core/models.py:13
 msgid "Monday"
 msgstr "Monday"
 
-#: core/models.py:14
 msgid "Tuesday"
 msgstr "Tuesday"
 
-#: core/models.py:15
 msgid "Wednesday"
 msgstr "Wednesday"
 
-#: core/models.py:16
 msgid "Thursday"
 msgstr "Thursday"
 
-#: core/models.py:17
 msgid "Friday"
 msgstr "Friday"
 
-#: core/models.py:18
 msgid "Saturday"
 msgstr "Saturday"
 
-#: core/models.py:19
 msgid "Sunday"
 msgstr "Sunday"
 
-#: core/models.py:39
 msgid "Active"
 msgstr "Active"
 
-#: core/models.py:40 core/templates/core/class_list.html:38
 msgid "Closed"
 msgstr "Closed"
 
-#: core/models.py:44
 msgid "Class code"
 msgstr "Class code"
 
-#: core/models.py:45 core/templates/core/class_list.html:18
-#: core/templates/core/enrollment_list.html:18
 msgid "Subject"
 msgstr "Subject"
 
-#: core/models.py:54
 msgid "Number of lessons"
 msgstr "Number of lessons"
 
-#: core/models.py:55
 msgid "Lesson length (min)"
 msgstr "Lesson length (min)"
 
-#: core/models.py:56
 msgid "Price per lesson (CZK)"
 msgstr "Price per lesson (CZK)"
 
-#: core/models.py:57
 msgid "Start date"
 msgstr "Start date"
 
-#: core/models.py:58
 msgid "End date"
 msgstr "End date"
 
-#: core/models.py:99
 msgid "Birth number / VS"
 msgstr "Birth number / VS"
 
-#: core/models.py:100 core/templates/core/student_list.html:18
 msgid "Name"
 msgstr "Name"
 
-#: core/models.py:101 core/templates/core/student_list.html:19
 msgid "Birth year"
 msgstr "Birth year"
 
-#: core/models.py:102 core/templates/core/enrollment_list.html:18
-#: core/templates/core/student_list.html:19
 msgid "Class"
 msgstr "Class"
 
-#: core/models.py:103 core/templates/core/student_list.html:19
 msgid "Contact"
 msgstr "Contact"
 
-#: core/models.py:104 core/models.py:119
-#: core/templates/core/enrollment_list.html:19
 msgid "Note"
 msgstr "Note"
 
-#: core/models.py:118 core/templates/core/enrollment_list.html:19
 msgid "Actual lessons"
 msgstr "Actual lessons"
 
-#: core/templates/core/calendar_pick.html:3 core/views.py:73
 msgid "Class calendar"
 msgstr "Class calendar"
 
-#: core/templates/core/calendar_pick.html:6
 msgid "Pick a class"
 msgstr "Pick a class"
 
-#: core/templates/core/calendar_pick.html:7
 msgid "Opens the calendar for the selected class."
 msgstr "Opens the calendar for the selected class."
 
-#: core/templates/core/calendar_pick.html:17
-#: core/templates/core/class_list.html:56
 msgid "No classes."
 msgstr "No classes."
 
-#: core/templates/core/class_calendar.html:3
 #, python-format
 msgid "Calendar – %(code)s"
 msgstr "Calendar – %(code)s"
 
-#: core/templates/core/class_calendar.html:6
-#: core/templates/core/class_list.html:51 templates/partials/_nav.html:16
-msgid "Calendar"
-msgstr "Calendar"
-
-#: core/templates/core/class_calendar.html:8
 msgid "Planned lessons:"
 msgstr "Planned lessons:"
 
-#: core/templates/core/class_calendar.html:15
-msgid "Monthly overview"
-msgstr "Monthly overview"
+#, fuzzy
+#| msgid "Download calendar image"
+msgid "Download image"
+msgstr "Download calendar image"
 
-#: core/templates/core/class_calendar.html:30
-msgid "No lessons in the given range."
-msgstr "No lessons in the given range."
-
-#: core/templates/core/class_calendar.html:35
-msgid "Days off"
-msgstr "Days off"
-
-#: core/templates/core/class_calendar.html:39
-msgid "Add"
-msgstr "Add"
-
-#: core/templates/core/class_calendar.html:47
-#: core/templates/core/enrollment_list.html:36
-msgid "Remove"
-msgstr "Remove"
-
-#: core/templates/core/class_calendar.html:51
-msgid "None"
-msgstr "None"
-
-#: core/templates/core/class_form.html:7
-msgid "Fill in details and save the class."
-msgstr "Fill in details and save the class."
-
-#: core/templates/core/class_form.html:14
-#: core/templates/core/class_times.html:32
-#: core/templates/core/enrollment_form.html:14
-#: core/templates/core/student_form.html:14
-msgid "Save"
-msgstr "Save"
-
-#: core/templates/core/class_form.html:15
-#: core/templates/core/enrollment_form.html:15
-#: core/templates/core/student_form.html:15
-#: core/templates/core/user_form.html:15
-msgid "Cancel"
-msgstr "Cancel"
-
-#: core/templates/core/class_list.html:3 core/templates/core/statistics.html:12
-#: templates/partials/_nav.html:13
-msgid "Classes"
-msgstr "Classes"
-
-#: core/templates/core/class_list.html:7 core/views.py:67
-msgid "Class manager"
-msgstr "Class manager"
-
-#: core/templates/core/class_list.html:8
-msgid "Overview of all classes, their schedules and revenue."
-msgstr "Overview of all classes, their schedules and revenue."
-
-#: core/templates/core/class_list.html:10 core/views.py:68 core/views.py:147
-msgid "Create class"
-msgstr "Create class"
-
-#: core/templates/core/class_list.html:18
-msgid "Code"
-msgstr "Code"
-
-#: core/templates/core/class_list.html:18
-msgid "Lessons"
-msgstr "Lessons"
-
-#: core/templates/core/class_list.html:18
-msgid "Length"
-msgstr "Length"
-
-#: core/templates/core/class_list.html:19
-msgid "Price"
-msgstr "Price"
-
-#: core/templates/core/class_list.html:19
-#: core/templates/core/statistics.html:24
-#: core/templates/core/student_list.html:3
-#: core/templates/core/student_list.html:7 core/views.py:69
-#: templates/partials/_nav.html:14
-msgid "Students"
-msgstr "Students"
-
-#: core/templates/core/class_list.html:19
-msgid "Revenue"
-msgstr "Revenue"
-
-#: core/templates/core/class_list.html:19
 msgid "From"
 msgstr "From"
 
-#: core/templates/core/class_list.html:19
 msgid "To"
 msgstr "To"
 
-#: core/templates/core/class_list.html:20
+msgid "Apply"
+msgstr "Apply"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "lessons"
+msgstr "lessons"
+
+#, fuzzy
+#| msgid "Lessons"
+msgid "Lesson"
+msgstr "Lessons"
+
+#, fuzzy
+#| msgid "Days off"
+msgid "Day off"
+msgstr "Days off"
+
+msgid "Today"
+msgstr ""
+
+msgid "No lessons in the given range."
+msgstr "No lessons in the given range."
+
+msgid "Days off"
+msgstr "Days off"
+
+#, fuzzy
+#| msgid "Days off"
+msgid "Add day off"
+msgstr "Days off"
+
+msgid "Remove"
+msgstr "Remove"
+
+#, fuzzy
+#| msgid "None"
+msgid "None yet."
+msgstr "None"
+
+msgid "Fill in details and save the class."
+msgstr "Fill in details and save the class."
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Classes"
+msgstr "Classes"
+
+msgid "Manage"
+msgstr ""
+
+msgid "Class manager"
+msgstr "Class manager"
+
+msgid "Overview of all classes, their schedules and revenue."
+msgstr "Overview of all classes, their schedules and revenue."
+
+msgid "Create class"
+msgstr "Create class"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Lessons"
+msgstr "Lessons"
+
+msgid "Length"
+msgstr "Length"
+
+msgid "Price"
+msgstr "Price"
+
+msgid "Students"
+msgstr "Students"
+
+msgid "Revenue"
+msgstr "Revenue"
+
 msgid "Status"
 msgstr "Status"
 
-#: core/templates/core/class_list.html:30
 msgid "min"
 msgstr "min"
 
-#: core/templates/core/class_list.html:31
-#: core/templates/core/class_list.html:33
 msgid "CZK"
 msgstr "CZK"
 
-#: core/templates/core/class_list.html:41
 #, python-format
 msgid "Close class %(code)s?"
 msgstr "Close class %(code)s?"
 
-#: core/templates/core/class_list.html:43 templates/partials/_messages.html:8
 msgid "Close"
 msgstr "Close"
 
-#: core/templates/core/class_list.html:49
-#: core/templates/core/student_list.html:33
 msgid "Edit"
 msgstr "Edit"
 
-#: core/templates/core/class_list.html:50
 msgid "Times"
 msgstr "Times"
 
-#: core/templates/core/class_times.html:3
+msgid "Calendar"
+msgstr "Calendar"
+
+#, fuzzy
+#| msgid "Total price:"
+msgid "Total revenue"
+msgstr "Total price:"
+
+#, fuzzy
+#| msgid "Enrollments"
+msgid "Enrolled students"
+msgstr "Enrollments"
+
+#, fuzzy
+#| msgid "No classes."
+msgid "Active classes"
+msgstr "No classes."
+
 #, python-format
 msgid "Schedule – %(code)s"
 msgstr "Schedule – %(code)s"
 
-#: core/templates/core/class_times.html:6
 msgid "Schedule"
 msgstr "Schedule"
 
-#: core/templates/core/class_times.html:7
 msgid "Set lesson times for this class."
 msgstr "Set lesson times for this class."
 
-#: core/templates/core/class_times.html:16
 msgid "Day"
 msgstr "Day"
 
-#: core/templates/core/class_times.html:16
 msgid "Start"
 msgstr "Start"
 
-#: core/templates/core/class_times.html:16
 msgid "End"
 msgstr "End"
 
-#: core/templates/core/class_times.html:16
-#: core/templates/core/student_list.html:39
 msgid "Delete"
 msgstr "Delete"
 
-#: core/templates/core/class_times.html:33
+msgid "Add row"
+msgstr ""
+
 msgid "Back"
 msgstr "Back"
 
-#: core/templates/core/dashboard.html:3
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: core/templates/core/dashboard.html:6
-#, python-format
-msgid "Hello, %(name)s."
+#, fuzzy, python-format
+#| msgid "Hello, %(name)s."
+msgid "Welcome back, %(name)s"
 msgstr "Hello, %(name)s."
 
-#: core/templates/core/dashboard.html:7
-msgid "LCM management overview. Choose an action below."
-msgstr "LCM management overview. Choose an action below."
+msgid "Managing learning,"
+msgstr ""
 
-#: core/templates/core/enrollment_form.html:7
-msgid "Assign a student to a class."
-msgstr "Assign a student to a class."
+msgid "in real time."
+msgstr ""
 
-#: core/templates/core/enrollment_list.html:3
-#: core/templates/core/enrollment_list.html:7 core/views.py:71
-#: templates/partials/_nav.html:15
-msgid "Enrollments"
-msgstr "Enrollments"
+msgid ""
+"A clear view of your classes, students and schedules — all in one calm, "
+"editorial workspace."
+msgstr ""
 
-#: core/templates/core/enrollment_list.html:8
-msgid "Student → class link."
-msgstr "Student → class link."
+msgid "Quick actions"
+msgstr ""
 
-#: core/templates/core/enrollment_list.html:10 core/views.py:72
-#: core/views.py:294
-msgid "Add enrollment"
-msgstr "Add enrollment"
-
-#: core/templates/core/enrollment_list.html:18
-msgid "Student"
-msgstr "Student"
-
-#: core/templates/core/enrollment_list.html:34
-msgid "Remove enrollment?"
-msgstr "Remove enrollment?"
-
-#: core/templates/core/enrollment_list.html:42
-msgid "No enrollments."
-msgstr "No enrollments."
-
-#: core/templates/core/statistics.html:3 core/templates/core/statistics.html:6
-#: core/views.py:66 templates/partials/_nav.html:12
-msgid "Statistics"
-msgstr "Statistics"
-
-#: core/templates/core/statistics.html:7
-msgid "System totals."
-msgstr "System totals."
-
-#: core/templates/core/statistics.html:16
-msgid "Teachers"
-msgstr "Teachers"
-
-#: core/templates/core/statistics.html:20
-msgid "Assistants"
-msgstr "Assistants"
-
-#: core/templates/core/student_form.html:7
-msgid "Student details."
-msgstr "Student details."
-
-#: core/templates/core/student_list.html:8
-msgid "List of all students in the system."
-msgstr "List of all students in the system."
-
-#: core/templates/core/student_list.html:10 core/views.py:70 core/views.py:249
-msgid "Add student"
-msgstr "Add student"
-
-#: core/templates/core/student_list.html:18
-msgid "Birth no./VS"
-msgstr "Birth no./VS"
-
-#: core/templates/core/student_list.html:34
-msgid "To class"
-msgstr "To class"
-
-#: core/templates/core/student_list.html:37
-msgid "Really delete this student?"
-msgstr "Really delete this student?"
-
-#: core/templates/core/student_list.html:46
-msgid "No students."
-msgstr "No students."
-
-#: core/templates/core/timetable.html:3 core/templates/core/timetable.html:7
-#: core/views.py:65 templates/partials/_nav.html:11
 msgid "Timetable"
 msgstr "Timetable"
 
-#: core/templates/core/timetable.html:8
-msgid "Weekly view of all active classes."
-msgstr "Weekly view of all active classes."
+msgid "Add student"
+msgstr "Add student"
 
-#: core/templates/core/timetable.html:24
-msgid "no lessons"
-msgstr "no lessons"
+msgid "Enrollments"
+msgstr "Enrollments"
 
-#: core/templates/core/user_form.html:7
-msgid "Creates a new user account."
-msgstr "Creates a new user account."
+msgid "Add enrollment"
+msgstr "Add enrollment"
 
-#: core/templates/core/user_form.html:14
-msgid "Create"
-msgstr "Create"
-
-#: core/views.py:76 core/views.py:318
 msgid "Create user"
 msgstr "Create user"
 
-#: core/views.py:145
+msgid "Today’s schedule"
+msgstr ""
+
+msgid "View all"
+msgstr ""
+
+msgid "No lessons scheduled for today."
+msgstr ""
+
+msgid "Quick stats"
+msgstr ""
+
+#, fuzzy
+#| msgid "No students."
+msgid "Total students"
+msgstr "No students."
+
+#, fuzzy
+#| msgid "Statistics"
+msgid "Open statistics"
+msgstr "Statistics"
+
+msgid "Assign a student to a class."
+msgstr "Assign a student to a class."
+
+msgid "Student → class link."
+msgstr "Student → class link."
+
+msgid "Student"
+msgstr "Student"
+
+msgid "Remove enrollment?"
+msgstr "Remove enrollment?"
+
+msgid "No enrollments."
+msgstr "No enrollments."
+
+msgid "Statistics"
+msgstr "Statistics"
+
+msgid "Insights"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Key performance indicators"
+msgstr ""
+
+#, fuzzy
+#| msgid "System totals."
+msgid "System totals at a glance."
+msgstr "System totals."
+
+msgid "Teachers"
+msgstr "Teachers"
+
+msgid "Assistants"
+msgstr "Assistants"
+
+#, fuzzy
+#| msgid "Monthly overview"
+msgid "Monthly activity"
+msgstr "Monthly overview"
+
+msgid "Interaction and attendance trends will appear here as data accrues."
+msgstr ""
+
+msgid "Team composition"
+msgstr ""
+
+msgid "Student details."
+msgstr "Student details."
+
+msgid "Directory"
+msgstr ""
+
+#, fuzzy
+#| msgid "Student deleted."
+msgid "Student management"
+msgstr "Student deleted."
+
+#, python-format
+msgid "%(counter)s student enrolled at the centre."
+msgid_plural "%(counter)s students enrolled at the centre."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "To class"
+msgstr "To class"
+
+msgid "Really delete this student?"
+msgstr "Really delete this student?"
+
+msgid "No students."
+msgstr "No students."
+
+msgid "Week"
+msgstr ""
+
+#, fuzzy
+#| msgid "Timetable"
+msgid "Weekly timetable"
+msgstr "Timetable"
+
+msgid "Weekly view of all active classes."
+msgstr "Weekly view of all active classes."
+
+msgid "Creates a new user account."
+msgstr "Creates a new user account."
+
+msgid "Create"
+msgstr "Create"
+
 msgid "Class created. Set the lesson schedule."
 msgstr "Class created. Set the lesson schedule."
 
-#: core/views.py:158
 msgid "Class saved."
 msgstr "Class saved."
 
-#: core/views.py:160
 #, python-format
 msgid "Edit %(code)s"
 msgstr "Edit %(code)s"
 
-#: core/views.py:171
 msgid "Schedule saved."
 msgstr "Schedule saved."
 
-#: core/views.py:184
 #, python-format
 msgid "Class %(code)s has been closed."
 msgstr "Class %(code)s has been closed."
 
-#: core/views.py:197
 msgid "Day off added."
 msgstr "Day off added."
 
-#: core/views.py:219
+msgid "Total price:"
+msgstr "Total price:"
+
 msgid "Day off removed."
 msgstr "Day off removed."
 
-#: core/views.py:247
 #, python-format
 msgid "Student %(name)s added."
 msgstr "Student %(name)s added."
 
-#: core/views.py:258
 msgid "Student saved."
 msgstr "Student saved."
 
-#: core/views.py:260
 #, python-format
 msgid "Edit %(name)s"
 msgstr "Edit %(name)s"
 
-#: core/views.py:270
 msgid "Student deleted."
 msgstr "Student deleted."
 
-#: core/views.py:292
 msgid "Student added to class."
 msgstr "Student added to class."
 
-#: core/views.py:304
 msgid "Enrollment removed."
 msgstr "Enrollment removed."
 
-#: core/views.py:316
 #, python-format
 msgid "User %(username)s created."
 msgstr "User %(username)s created."
 
-#: lcm_dashboard/settings.py:95
 msgid "Czech"
 msgstr "Czech"
 
-#: lcm_dashboard/settings.py:96
 msgid "English"
 msgstr "English"
 
-#: lcm_dashboard/settings.py:97
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
-#: templates/partials/_lang_switch.html:7
 msgid "Language"
 msgstr "Language"
 
-#: templates/partials/_nav.html:3
 msgid "Main navigation"
 msgstr "Main navigation"
 
-#: templates/partials/_nav.html:7
 msgid "Menu"
 msgstr "Menu"
 
-#: templates/partials/_nav.html:18
 msgid "Users"
 msgstr "Users"
 
-#: templates/partials/_nav.html:19
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/partials/_nav.html:26
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/registration/login.html:3 templates/registration/login.html:11
-#: templates/registration/login.html:26
 msgid "Sign in"
 msgstr "Sign in"
 
-#: templates/registration/login.html:19
+msgid "Welcome back to the LCM Manager."
+msgstr ""
+
 msgid "Username"
 msgstr "Username"
 
-#: templates/registration/login.html:23
 msgid "Password"
 msgstr "Password"
 
-#: core/templates/core/class_calendar.html
-msgid "Download calendar image"
-msgstr "Download calendar image"
+#~ msgid "Add"
+#~ msgstr "Add"
 
-#: core/views.py
-msgid "Total price:"
-msgstr "Total price:"
+#~ msgid "LCM management overview. Choose an action below."
+#~ msgstr "LCM management overview. Choose an action below."
 
-#: core/views.py
-msgid "lessons"
-msgstr "lessons"
+#~ msgid "List of all students in the system."
+#~ msgstr "List of all students in the system."
 
-#: core/templates/core/class_calendar.html
-msgid "Date range"
-msgstr "Date range"
+#~ msgid "Birth no./VS"
+#~ msgstr "Birth no./VS"
 
-#: core/templates/core/class_calendar.html
-msgid "Apply"
-msgstr "Apply"
+#~ msgid "no lessons"
+#~ msgstr "no lessons"
 
-#: core/templates/core/class_calendar.html
-msgid "Reset"
-msgstr "Reset"
+#~ msgid "Date range"
+#~ msgstr "Date range"

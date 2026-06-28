@@ -8,7 +8,8 @@
       <div class="auth-card__logo">
         <img src="{% static 'core/img/logo.png' %}" alt="Làm Cha Mẹ CZ">
       </div>
-      <p>{% trans "Sign in" %}</p>
+      <h1 class="auth-card__title">{% trans "Sign in" %}</h1>
+      <p>{% trans "Welcome back to the LCM Manager." %}</p>
     </header>
     <form method="post" class="stack stack-md">
       {% csrf_token %}

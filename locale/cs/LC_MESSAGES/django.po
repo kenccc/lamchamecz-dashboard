@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lcm_dashboard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 21:02+0200\n"
+"POT-Creation-Date: 2026-06-28 15:34+0000\n"
 "PO-Revision-Date: 2026-04-28 00:00+0000\n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -12,557 +12,504 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
 "<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
-#: core/forms.py:22
 msgid "Full name"
 msgstr "Celé jméno"
 
-#: core/forms.py:23
 msgid "Role"
 msgstr "Role"
 
-#: core/models.py:7
+msgid "End date must be on or after start date."
+msgstr "Datum konce musí být stejné nebo pozdější než datum začátku."
+
+#, python-format
+msgid "Class span exceeds %(years)d years."
+msgstr "Délka kurzu přesahuje %(years)d let."
+
 msgid "Administrator"
 msgstr "Administrátor"
 
-#: core/models.py:8 core/models.py:48
 msgid "Teacher"
 msgstr "Učitel/ka"
 
-#: core/models.py:9 core/models.py:52
 msgid "Assistant"
 msgstr "Asistent/ka"
 
-#: core/models.py:13
 msgid "Monday"
 msgstr "Pondělí"
 
-#: core/models.py:14
 msgid "Tuesday"
 msgstr "Úterý"
 
-#: core/models.py:15
 msgid "Wednesday"
 msgstr "Středa"
 
-#: core/models.py:16
 msgid "Thursday"
 msgstr "Čtvrtek"
 
-#: core/models.py:17
 msgid "Friday"
 msgstr "Pátek"
 
-#: core/models.py:18
 msgid "Saturday"
 msgstr "Sobota"
 
-#: core/models.py:19
 msgid "Sunday"
 msgstr "Neděle"
 
-#: core/models.py:39
 msgid "Active"
 msgstr "Aktivní"
 
-#: core/models.py:40 core/templates/core/class_list.html:38
 msgid "Closed"
 msgstr "Uzavřená"
 
-#: core/models.py:44
 msgid "Class code"
 msgstr "Kód třídy"
 
-#: core/models.py:45 core/templates/core/class_list.html:18
-#: core/templates/core/enrollment_list.html:18
 msgid "Subject"
 msgstr "Předmět"
 
-#: core/models.py:54
 msgid "Number of lessons"
 msgstr "Počet hodin"
 
-#: core/models.py:55
 msgid "Lesson length (min)"
 msgstr "Délka hodiny (min)"
 
-#: core/models.py:56
 msgid "Price per lesson (CZK)"
 msgstr "Cena za hodinu (Kč)"
 
-#: core/models.py:57
 msgid "Start date"
 msgstr "Datum začátku"
 
-#: core/models.py:58
 msgid "End date"
 msgstr "Datum konce"
 
-#: core/models.py:99
 msgid "Birth number / VS"
 msgstr "Rodné číslo / VS"
 
-#: core/models.py:100 core/templates/core/student_list.html:18
 msgid "Name"
 msgstr "Jméno"
 
-#: core/models.py:101 core/templates/core/student_list.html:19
 msgid "Birth year"
 msgstr "Rok narození"
 
-#: core/models.py:102 core/templates/core/enrollment_list.html:18
-#: core/templates/core/student_list.html:19
 msgid "Class"
 msgstr "Třída"
 
-#: core/models.py:103 core/templates/core/student_list.html:19
 msgid "Contact"
 msgstr "Kontakt"
 
-#: core/models.py:104 core/models.py:119
-#: core/templates/core/enrollment_list.html:19
 msgid "Note"
 msgstr "Poznámka"
 
-#: core/models.py:118 core/templates/core/enrollment_list.html:19
 msgid "Actual lessons"
 msgstr "Skutečný počet hodin"
 
-#: core/templates/core/calendar_pick.html:3 core/views.py:73
 msgid "Class calendar"
 msgstr "Kalendář tříd"
 
-#: core/templates/core/calendar_pick.html:6
 msgid "Pick a class"
 msgstr "Vyberte třídu"
 
-#: core/templates/core/calendar_pick.html:7
 msgid "Opens the calendar for the selected class."
 msgstr "Otevře kalendář vybrané třídy."
 
-#: core/templates/core/calendar_pick.html:17
-#: core/templates/core/class_list.html:56
 msgid "No classes."
 msgstr "Žádné třídy."
 
-#: core/templates/core/class_calendar.html:3
 #, python-format
 msgid "Calendar – %(code)s"
 msgstr "Kalendář – %(code)s"
 
-#: core/templates/core/class_calendar.html:6
-#: core/templates/core/class_list.html:51 templates/partials/_nav.html:16
-msgid "Calendar"
-msgstr "Kalendář"
-
-#: core/templates/core/class_calendar.html:8
 msgid "Planned lessons:"
 msgstr "Plánovaných hodin:"
 
-#: core/templates/core/class_calendar.html:15
-msgid "Monthly overview"
-msgstr "Měsíční přehled"
+msgid "Download image"
+msgstr "Stáhnout obrázek"
 
-#: core/templates/core/class_calendar.html:30
-msgid "No lessons in the given range."
-msgstr "Žádné hodiny v daném intervalu."
-
-#: core/templates/core/class_calendar.html:35
-msgid "Days off"
-msgstr "Dny volna"
-
-#: core/templates/core/class_calendar.html:39
-msgid "Add"
-msgstr "Přidat"
-
-#: core/templates/core/class_calendar.html:47
-#: core/templates/core/enrollment_list.html:36
-msgid "Remove"
-msgstr "Odebrat"
-
-#: core/templates/core/class_calendar.html:51
-msgid "None"
-msgstr "Žádné"
-
-#: core/templates/core/class_form.html:7
-msgid "Fill in details and save the class."
-msgstr "Vyplňte údaje a uložte třídu."
-
-#: core/templates/core/class_form.html:14
-#: core/templates/core/class_times.html:32
-#: core/templates/core/enrollment_form.html:14
-#: core/templates/core/student_form.html:14
-msgid "Save"
-msgstr "Uložit"
-
-#: core/templates/core/class_form.html:15
-#: core/templates/core/enrollment_form.html:15
-#: core/templates/core/student_form.html:15
-#: core/templates/core/user_form.html:15
-msgid "Cancel"
-msgstr "Zrušit"
-
-#: core/templates/core/class_list.html:3 core/templates/core/statistics.html:12
-#: templates/partials/_nav.html:13
-msgid "Classes"
-msgstr "Třídy"
-
-#: core/templates/core/class_list.html:7 core/views.py:67
-msgid "Class manager"
-msgstr "Správce tříd"
-
-#: core/templates/core/class_list.html:8
-msgid "Overview of all classes, their schedules and revenue."
-msgstr "Přehled všech tříd, jejich rozvrhů a tržby."
-
-#: core/templates/core/class_list.html:10 core/views.py:68 core/views.py:147
-msgid "Create class"
-msgstr "Vytvořit třídu"
-
-#: core/templates/core/class_list.html:18
-msgid "Code"
-msgstr "Kód"
-
-#: core/templates/core/class_list.html:18
-msgid "Lessons"
-msgstr "Hodin"
-
-#: core/templates/core/class_list.html:18
-msgid "Length"
-msgstr "Délka"
-
-#: core/templates/core/class_list.html:19
-msgid "Price"
-msgstr "Cena"
-
-#: core/templates/core/class_list.html:19
-#: core/templates/core/statistics.html:24
-#: core/templates/core/student_list.html:3
-#: core/templates/core/student_list.html:7 core/views.py:69
-#: templates/partials/_nav.html:14
-msgid "Students"
-msgstr "Studenti"
-
-#: core/templates/core/class_list.html:19
-msgid "Revenue"
-msgstr "Tržba"
-
-#: core/templates/core/class_list.html:19
 msgid "From"
 msgstr "Od"
 
-#: core/templates/core/class_list.html:19
 msgid "To"
 msgstr "Do"
 
-#: core/templates/core/class_list.html:20
+msgid "Apply"
+msgstr "Použít"
+
+msgid "Reset"
+msgstr "Resetovat"
+
+msgid "lessons"
+msgstr "lekcí"
+
+msgid "Lesson"
+msgstr "Lekce"
+
+msgid "Day off"
+msgstr "Volno"
+
+msgid "Today"
+msgstr "Dnes"
+
+msgid "No lessons in the given range."
+msgstr "Žádné hodiny v daném intervalu."
+
+msgid "Days off"
+msgstr "Dny volna"
+
+msgid "Add day off"
+msgstr "Přidat volno"
+
+msgid "Remove"
+msgstr "Odebrat"
+
+msgid "None yet."
+msgstr "Zatím žádné."
+
+msgid "Fill in details and save the class."
+msgstr "Vyplňte údaje a uložte třídu."
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Classes"
+msgstr "Třídy"
+
+msgid "Manage"
+msgstr "Správa"
+
+msgid "Class manager"
+msgstr "Správce tříd"
+
+msgid "Overview of all classes, their schedules and revenue."
+msgstr "Přehled všech tříd, jejich rozvrhů a tržby."
+
+msgid "Create class"
+msgstr "Vytvořit třídu"
+
+msgid "Code"
+msgstr "Kód"
+
+msgid "Lessons"
+msgstr "Hodin"
+
+msgid "Length"
+msgstr "Délka"
+
+msgid "Price"
+msgstr "Cena"
+
+msgid "Students"
+msgstr "Studenti"
+
+msgid "Revenue"
+msgstr "Tržba"
+
 msgid "Status"
 msgstr "Status"
 
-#: core/templates/core/class_list.html:30
 msgid "min"
 msgstr "min"
 
-#: core/templates/core/class_list.html:31
-#: core/templates/core/class_list.html:33
 msgid "CZK"
 msgstr "Kč"
 
-#: core/templates/core/class_list.html:41
 #, python-format
 msgid "Close class %(code)s?"
 msgstr "Uzavřít třídu %(code)s?"
 
-#: core/templates/core/class_list.html:43 templates/partials/_messages.html:8
 msgid "Close"
 msgstr "Zavřít"
 
-#: core/templates/core/class_list.html:49
-#: core/templates/core/student_list.html:33
 msgid "Edit"
 msgstr "Upravit"
 
-#: core/templates/core/class_list.html:50
 msgid "Times"
 msgstr "Časy"
 
-#: core/templates/core/class_times.html:3
+msgid "Calendar"
+msgstr "Kalendář"
+
+msgid "Total revenue"
+msgstr "Celkové tržby"
+
+msgid "Enrolled students"
+msgstr "Zapsaní studenti"
+
+msgid "Active classes"
+msgstr "Aktivní třídy"
+
 #, python-format
 msgid "Schedule – %(code)s"
 msgstr "Rozvrh – %(code)s"
 
-#: core/templates/core/class_times.html:6
 msgid "Schedule"
 msgstr "Rozvrh"
 
-#: core/templates/core/class_times.html:7
 msgid "Set lesson times for this class."
 msgstr "Nastavte časy hodin pro tuto třídu."
 
-#: core/templates/core/class_times.html:16
 msgid "Day"
 msgstr "Den"
 
-#: core/templates/core/class_times.html:16
 msgid "Start"
 msgstr "Začátek"
 
-#: core/templates/core/class_times.html:16
 msgid "End"
 msgstr "Konec"
 
-#: core/templates/core/class_times.html:16
-#: core/templates/core/student_list.html:39
 msgid "Delete"
 msgstr "Smazat"
 
-#: core/templates/core/class_times.html:33
+msgid "Add row"
+msgstr "Přidat řádek"
+
 msgid "Back"
 msgstr "Zpět"
 
-#: core/templates/core/dashboard.html:3
 msgid "Dashboard"
 msgstr "Přehled"
 
-#: core/templates/core/dashboard.html:6
-#, python-format
-msgid "Hello, %(name)s."
-msgstr "Dobrý den, %(name)s."
+msgid "Welcome back, %(name)s"
+msgstr "Vítejte zpět, %(name)s"
 
-#: core/templates/core/dashboard.html:7
-msgid "LCM management overview. Choose an action below."
-msgstr "Přehled správy LCM. Vyberte akci níže."
+msgid "Managing learning,"
+msgstr "Správa vzdělávání,"
 
-#: core/templates/core/enrollment_form.html:7
-msgid "Assign a student to a class."
-msgstr "Přiřaďte studenta do třídy."
+msgid "in real time."
+msgstr "v reálném čase."
 
-#: core/templates/core/enrollment_list.html:3
-#: core/templates/core/enrollment_list.html:7 core/views.py:71
-#: templates/partials/_nav.html:15
-msgid "Enrollments"
-msgstr "Zápisy"
+msgid ""
+"A clear view of your classes, students and schedules — all in one calm, "
+"editorial workspace."
+msgstr ""
 
-#: core/templates/core/enrollment_list.html:8
-msgid "Student → class link."
-msgstr "Vazba student → třída."
+msgid "Quick actions"
+msgstr "Rychlé akce"
 
-#: core/templates/core/enrollment_list.html:10 core/views.py:72
-#: core/views.py:294
-msgid "Add enrollment"
-msgstr "Přidat zápis"
-
-#: core/templates/core/enrollment_list.html:18
-msgid "Student"
-msgstr "Student"
-
-#: core/templates/core/enrollment_list.html:34
-msgid "Remove enrollment?"
-msgstr "Odebrat zápis?"
-
-#: core/templates/core/enrollment_list.html:42
-msgid "No enrollments."
-msgstr "Žádné zápisy."
-
-#: core/templates/core/statistics.html:3 core/templates/core/statistics.html:6
-#: core/views.py:66 templates/partials/_nav.html:12
-msgid "Statistics"
-msgstr "Statistiky"
-
-#: core/templates/core/statistics.html:7
-msgid "System totals."
-msgstr "Celkové ukazatele systému."
-
-#: core/templates/core/statistics.html:16
-msgid "Teachers"
-msgstr "Učitelé"
-
-#: core/templates/core/statistics.html:20
-msgid "Assistants"
-msgstr "Asistenti"
-
-#: core/templates/core/student_form.html:7
-msgid "Student details."
-msgstr "Údaje studenta."
-
-#: core/templates/core/student_list.html:8
-msgid "List of all students in the system."
-msgstr "Seznam všech studentů v systému."
-
-#: core/templates/core/student_list.html:10 core/views.py:70 core/views.py:249
-msgid "Add student"
-msgstr "Přidat studenta"
-
-#: core/templates/core/student_list.html:18
-msgid "Birth no./VS"
-msgstr "Rodné č./VS"
-
-#: core/templates/core/student_list.html:34
-msgid "To class"
-msgstr "Do třídy"
-
-#: core/templates/core/student_list.html:37
-msgid "Really delete this student?"
-msgstr "Opravdu smazat studenta?"
-
-#: core/templates/core/student_list.html:46
-msgid "No students."
-msgstr "Žádní studenti."
-
-#: core/templates/core/timetable.html:3 core/templates/core/timetable.html:7
-#: core/views.py:65 templates/partials/_nav.html:11
 msgid "Timetable"
 msgstr "Rozvrh"
 
-#: core/templates/core/timetable.html:8
-msgid "Weekly view of all active classes."
-msgstr "Týdenní pohled na všechny aktivní třídy."
+msgid "Add student"
+msgstr "Přidat studenta"
 
-#: core/templates/core/timetable.html:24
-msgid "no lessons"
-msgstr "žádné hodiny"
+msgid "Enrollments"
+msgstr "Zápisy"
 
-#: core/templates/core/user_form.html:7
-msgid "Creates a new user account."
-msgstr "Vytvoří nový uživatelský účet."
+msgid "Add enrollment"
+msgstr "Přidat zápis"
 
-#: core/templates/core/user_form.html:14
-msgid "Create"
-msgstr "Vytvořit"
-
-#: core/views.py:76 core/views.py:318
 msgid "Create user"
 msgstr "Vytvořit uživatele"
 
-#: core/views.py:145
+msgid "Today’s schedule"
+msgstr "Dnešní rozvrh"
+
+msgid "View all"
+msgstr "Zobrazit vše"
+
+msgid "No lessons scheduled for today."
+msgstr "Dnes nejsou naplánované žádné lekce."
+
+msgid "Quick stats"
+msgstr "Rychlé statistiky"
+
+msgid "Total students"
+msgstr "Celkem studentů"
+
+msgid "Open statistics"
+msgstr "Otevřít statistiky"
+
+msgid "Assign a student to a class."
+msgstr "Přiřaďte studenta do třídy."
+
+msgid "Student → class link."
+msgstr "Vazba student → třída."
+
+msgid "Student"
+msgstr "Student"
+
+msgid "Remove enrollment?"
+msgstr "Odebrat zápis?"
+
+msgid "No enrollments."
+msgstr "Žádné zápisy."
+
+msgid "Statistics"
+msgstr "Statistiky"
+
+msgid "Insights"
+msgstr "Přehledy"
+
+msgid "Overview"
+msgstr "Souhrn"
+
+msgid "Key performance indicators"
+msgstr "Klíčové ukazatele výkonu"
+
+msgid "System totals at a glance."
+msgstr "Souhrnné údaje systému na první pohled."
+
+msgid "Teachers"
+msgstr "Učitelé"
+
+msgid "Assistants"
+msgstr "Asistenti"
+
+msgid "Monthly activity"
+msgstr "Měsíční aktivita"
+
+msgid "Interaction and attendance trends will appear here as data accrues."
+msgstr "Trendy interakcí a docházky se zde zobrazí, jakmile přibudou data."
+
+msgid "Team composition"
+msgstr "Složení týmu"
+
+msgid "Student details."
+msgstr "Údaje studenta."
+
+msgid "Directory"
+msgstr "Adresář"
+
+msgid "Student management"
+msgstr "Správa studentů"
+
+#, python-format
+msgid "%(counter)s student enrolled at the centre."
+msgid_plural "%(counter)s students enrolled at the centre."
+msgstr[0] "%(counter)s student zapsaný v centru."
+msgstr[1] "%(counter)s studenti zapsaní v centru."
+msgstr[2] "%(counter)s studentů zapsaných v centru."
+msgstr[3] "%(counter)s studentů zapsaných v centru."
+
+msgid "To class"
+msgstr "Do třídy"
+
+msgid "Really delete this student?"
+msgstr "Opravdu smazat studenta?"
+
+msgid "No students."
+msgstr "Žádní studenti."
+
+msgid "Week"
+msgstr "Týden"
+
+msgid "Weekly timetable"
+msgstr "Týdenní rozvrh"
+
+msgid "Weekly view of all active classes."
+msgstr "Týdenní pohled na všechny aktivní třídy."
+
+msgid "Creates a new user account."
+msgstr "Vytvoří nový uživatelský účet."
+
+msgid "Create"
+msgstr "Vytvořit"
+
 msgid "Class created. Set the lesson schedule."
 msgstr "Třída vytvořena. Nastavte rozvrh hodin."
 
-#: core/views.py:158
 msgid "Class saved."
 msgstr "Třída uložena."
 
-#: core/views.py:160
 #, python-format
 msgid "Edit %(code)s"
 msgstr "Upravit %(code)s"
 
-#: core/views.py:171
 msgid "Schedule saved."
 msgstr "Rozvrh uložen."
 
-#: core/views.py:184
 #, python-format
 msgid "Class %(code)s has been closed."
 msgstr "Třída %(code)s byla uzavřena."
 
-#: core/views.py:197
 msgid "Day off added."
 msgstr "Den volna přidán."
 
-#: core/views.py:219
+msgid "Total price:"
+msgstr "Celková cena:"
+
 msgid "Day off removed."
 msgstr "Den volna odebrán."
 
-#: core/views.py:247
 #, python-format
 msgid "Student %(name)s added."
 msgstr "Student %(name)s přidán."
 
-#: core/views.py:258
 msgid "Student saved."
 msgstr "Student uložen."
 
-#: core/views.py:260
 #, python-format
 msgid "Edit %(name)s"
 msgstr "Upravit %(name)s"
 
-#: core/views.py:270
 msgid "Student deleted."
 msgstr "Student smazán."
 
-#: core/views.py:292
 msgid "Student added to class."
 msgstr "Student přidán do třídy."
 
-#: core/views.py:304
 msgid "Enrollment removed."
 msgstr "Zápis odebrán."
 
-#: core/views.py:316
 #, python-format
 msgid "User %(username)s created."
 msgstr "Uživatel %(username)s vytvořen."
 
-#: lcm_dashboard/settings.py:95
 msgid "Czech"
 msgstr "Čeština"
 
-#: lcm_dashboard/settings.py:96
 msgid "English"
 msgstr "Angličtina"
 
-#: lcm_dashboard/settings.py:97
 msgid "Vietnamese"
 msgstr "Vietnamština"
 
-#: templates/partials/_lang_switch.html:7
 msgid "Language"
 msgstr "Jazyk"
 
-#: templates/partials/_nav.html:3
 msgid "Main navigation"
 msgstr "Hlavní navigace"
 
-#: templates/partials/_nav.html:7
 msgid "Menu"
 msgstr "Menu"
 
-#: templates/partials/_nav.html:18
 msgid "Users"
 msgstr "Uživatelé"
 
-#: templates/partials/_nav.html:19
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/partials/_nav.html:26
 msgid "Logout"
 msgstr "Odhlásit"
 
-#: templates/registration/login.html:3 templates/registration/login.html:11
-#: templates/registration/login.html:26
 msgid "Sign in"
 msgstr "Přihlásit"
 
-#: templates/registration/login.html:19
+msgid "Welcome back to the LCM Manager."
+msgstr "Vítejte zpět v LCM Manageru."
+
 msgid "Username"
 msgstr "Uživatelské jméno"
 
-#: templates/registration/login.html:23
 msgid "Password"
 msgstr "Heslo"
 
-#: core/templates/core/class_calendar.html
-msgid "Download calendar image"
-msgstr "Stáhnout obrázek kalendáře"
+#~ msgid "Add"
+#~ msgstr "Přidat"
 
-#: core/views.py
-msgid "Total price:"
-msgstr "Celková cena:"
+#~ msgid "LCM management overview. Choose an action below."
+#~ msgstr "Přehled správy LCM. Vyberte akci níže."
 
-#: core/views.py
-msgid "lessons"
-msgstr "lekcí"
+#~ msgid "List of all students in the system."
+#~ msgstr "Seznam všech studentů v systému."
 
-#: core/templates/core/class_calendar.html
-msgid "Date range"
-msgstr "Rozsah dat"
+#~ msgid "Birth no./VS"
+#~ msgstr "Rodné č./VS"
 
-#: core/templates/core/class_calendar.html
-msgid "Apply"
-msgstr "Použít"
+#~ msgid "no lessons"
+#~ msgstr "žádné hodiny"
 
-#: core/templates/core/class_calendar.html
-msgid "Reset"
-msgstr "Resetovat"
+#~ msgid "Date range"
+#~ msgstr "Rozsah dat"

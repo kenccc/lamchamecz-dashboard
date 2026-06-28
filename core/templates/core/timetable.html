@@ -2,29 +2,44 @@
 {% load i18n %}
 {% block title %}{% trans "Timetable" %}{% endblock %}
 {% block content %}
-<header class="row-flex-between section">
+<header class="page-head">
   <div>
-    <h2 class="mb-1">{% trans "Timetable" %}</h2>
-    <p class="text-muted mb-1">{% trans "Weekly view of all active classes." %}</p>
+    <div class="page-head__crumbs"><span>{% trans "Schedule" %}</span><span class="sep">/</span><span>{% trans "Week" %}</span></div>
+    <h1 class="page-head__title">{% trans "Weekly timetable" %}</h1>
+    <p class="page-head__sub">{% trans "Weekly view of all active classes." %}</p>
   </div>
 </header>
 
-<div class="timetable">
-  {% for code, label, slots in days %}
-    <div class="timetable-day" data-reveal data-reveal-group="days">
-      <div class="timetable-day__head">{{ label }}</div>
-      <div class="timetable-day__body">
-        {% for s in slots %}
-          <a href="{% url 'class_calendar' s.cls.pk %}" class="timetable-slot">
-            <div class="timetable-slot__subject">{{ s.cls.subject }}</div>
-            <div class="timetable-slot__code">{{ s.cls.code }}</div>
-            <div class="timetable-slot__time">{{ s.time.time_start|time:"H:i" }} – {{ s.time.time_end|time:"H:i" }}</div>
-          </a>
-        {% empty %}
-          <div class="timetable-day__empty">{% trans "no lessons" %}</div>
+<div class="cal-grid glass-card glass-card--strong" data-reveal style="--hour-px: {{ hour_px }}px;">
+  <div class="cal-grid__scroll">
+    <!-- Header row: corner + weekday labels (sticky) -->
+    <div class="cal-grid__head">
+      <div class="cal-grid__corner"></div>
+      {% for col in columns %}
+        <div class="cal-grid__day{% if col.is_today %} is-today{% endif %}">{{ col.label }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Body: time axis + day columns -->
+    <div class="cal-grid__body" style="height: {{ body_h }}px;">
+      <div class="cal-axis">
+        {% for h in hours %}
+          <div class="cal-axis__hour"><span>{{ h }}:00</span></div>
         {% endfor %}
       </div>
+      {% for col in columns %}
+        <div class="cal-col{% if col.is_today %} is-today{% endif %}">
+          {% for lesson in col.lessons %}
+            <a class="cal-lesson" href="{% url 'class_calendar' lesson.cls.pk %}"
+               style="top: {{ lesson.top }}px; height: {{ lesson.height }}px;">
+              <span class="cal-lesson__subject">{{ lesson.cls.subject }}</span>
+              <span class="cal-lesson__time">{{ lesson.time.time_start|time:"H:i" }}–{{ lesson.time.time_end|time:"H:i" }}</span>
+              <span class="cal-lesson__meta">{{ lesson.cls.code }}{% if lesson.cls.teacher %} · {{ lesson.cls.teacher.display_name }}{% endif %}</span>
+            </a>
+          {% endfor %}
+        </div>
+      {% endfor %}
     </div>
-  {% endfor %}
+  </div>
 </div>
 {% endblock %}

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lcm_dashboard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 21:02+0200\n"
+"POT-Creation-Date: 2026-06-28 15:34+0000\n"
 "PO-Revision-Date: 2026-04-28 00:00+0000\n"
 "Language-Team: Vietnamese\n"
 "Language: vi\n"
@@ -11,557 +11,501 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: core/forms.py:22
 msgid "Full name"
 msgstr "Họ và tên"
 
-#: core/forms.py:23
 msgid "Role"
 msgstr "Vai trò"
 
-#: core/models.py:7
+msgid "End date must be on or after start date."
+msgstr "Ngày kết thúc phải bằng hoặc sau ngày bắt đầu."
+
+#, python-format
+msgid "Class span exceeds %(years)d years."
+msgstr "Thời lượng lớp học vượt quá %(years)d năm."
+
 msgid "Administrator"
 msgstr "Quản trị viên"
 
-#: core/models.py:8 core/models.py:48
 msgid "Teacher"
 msgstr "Giáo viên"
 
-#: core/models.py:9 core/models.py:52
 msgid "Assistant"
 msgstr "Trợ giảng"
 
-#: core/models.py:13
 msgid "Monday"
 msgstr "Thứ Hai"
 
-#: core/models.py:14
 msgid "Tuesday"
 msgstr "Thứ Ba"
 
-#: core/models.py:15
 msgid "Wednesday"
 msgstr "Thứ Tư"
 
-#: core/models.py:16
 msgid "Thursday"
 msgstr "Thứ Năm"
 
-#: core/models.py:17
 msgid "Friday"
 msgstr "Thứ Sáu"
 
-#: core/models.py:18
 msgid "Saturday"
 msgstr "Thứ Bảy"
 
-#: core/models.py:19
 msgid "Sunday"
 msgstr "Chủ nhật"
 
-#: core/models.py:39
 msgid "Active"
 msgstr "Hoạt động"
 
-#: core/models.py:40 core/templates/core/class_list.html:38
 msgid "Closed"
 msgstr "Đã đóng"
 
-#: core/models.py:44
 msgid "Class code"
 msgstr "Mã lớp"
 
-#: core/models.py:45 core/templates/core/class_list.html:18
-#: core/templates/core/enrollment_list.html:18
 msgid "Subject"
 msgstr "Môn học"
 
-#: core/models.py:54
 msgid "Number of lessons"
 msgstr "Số buổi học"
 
-#: core/models.py:55
 msgid "Lesson length (min)"
 msgstr "Thời lượng buổi (phút)"
 
-#: core/models.py:56
 msgid "Price per lesson (CZK)"
 msgstr "Giá mỗi buổi (CZK)"
 
-#: core/models.py:57
 msgid "Start date"
 msgstr "Ngày bắt đầu"
 
-#: core/models.py:58
 msgid "End date"
 msgstr "Ngày kết thúc"
 
-#: core/models.py:99
 msgid "Birth number / VS"
 msgstr "Mã định danh / VS"
 
-#: core/models.py:100 core/templates/core/student_list.html:18
 msgid "Name"
 msgstr "Tên"
 
-#: core/models.py:101 core/templates/core/student_list.html:19
 msgid "Birth year"
 msgstr "Năm sinh"
 
-#: core/models.py:102 core/templates/core/enrollment_list.html:18
-#: core/templates/core/student_list.html:19
 msgid "Class"
 msgstr "Lớp"
 
-#: core/models.py:103 core/templates/core/student_list.html:19
 msgid "Contact"
 msgstr "Liên hệ"
 
-#: core/models.py:104 core/models.py:119
-#: core/templates/core/enrollment_list.html:19
 msgid "Note"
 msgstr "Ghi chú"
 
-#: core/models.py:118 core/templates/core/enrollment_list.html:19
 msgid "Actual lessons"
 msgstr "Số buổi thực tế"
 
-#: core/templates/core/calendar_pick.html:3 core/views.py:73
 msgid "Class calendar"
 msgstr "Lịch lớp học"
 
-#: core/templates/core/calendar_pick.html:6
 msgid "Pick a class"
 msgstr "Chọn một lớp"
 
-#: core/templates/core/calendar_pick.html:7
 msgid "Opens the calendar for the selected class."
 msgstr "Mở lịch của lớp đã chọn."
 
-#: core/templates/core/calendar_pick.html:17
-#: core/templates/core/class_list.html:56
 msgid "No classes."
 msgstr "Không có lớp."
 
-#: core/templates/core/class_calendar.html:3
 #, python-format
 msgid "Calendar – %(code)s"
 msgstr "Lịch – %(code)s"
 
-#: core/templates/core/class_calendar.html:6
-#: core/templates/core/class_list.html:51 templates/partials/_nav.html:16
-msgid "Calendar"
-msgstr "Lịch"
-
-#: core/templates/core/class_calendar.html:8
 msgid "Planned lessons:"
 msgstr "Buổi đã lên lịch:"
 
-#: core/templates/core/class_calendar.html:15
-msgid "Monthly overview"
-msgstr "Tổng quan tháng"
+msgid "Download image"
+msgstr "Tải hình ảnh"
 
-#: core/templates/core/class_calendar.html:30
-msgid "No lessons in the given range."
-msgstr "Không có buổi nào trong khoảng này."
-
-#: core/templates/core/class_calendar.html:35
-msgid "Days off"
-msgstr "Ngày nghỉ"
-
-#: core/templates/core/class_calendar.html:39
-msgid "Add"
-msgstr "Thêm"
-
-#: core/templates/core/class_calendar.html:47
-#: core/templates/core/enrollment_list.html:36
-msgid "Remove"
-msgstr "Xoá"
-
-#: core/templates/core/class_calendar.html:51
-msgid "None"
-msgstr "Không có"
-
-#: core/templates/core/class_form.html:7
-msgid "Fill in details and save the class."
-msgstr "Nhập thông tin và lưu lớp."
-
-#: core/templates/core/class_form.html:14
-#: core/templates/core/class_times.html:32
-#: core/templates/core/enrollment_form.html:14
-#: core/templates/core/student_form.html:14
-msgid "Save"
-msgstr "Lưu"
-
-#: core/templates/core/class_form.html:15
-#: core/templates/core/enrollment_form.html:15
-#: core/templates/core/student_form.html:15
-#: core/templates/core/user_form.html:15
-msgid "Cancel"
-msgstr "Huỷ"
-
-#: core/templates/core/class_list.html:3 core/templates/core/statistics.html:12
-#: templates/partials/_nav.html:13
-msgid "Classes"
-msgstr "Lớp học"
-
-#: core/templates/core/class_list.html:7 core/views.py:67
-msgid "Class manager"
-msgstr "Quản lý lớp"
-
-#: core/templates/core/class_list.html:8
-msgid "Overview of all classes, their schedules and revenue."
-msgstr "Tổng quan tất cả các lớp, lịch và doanh thu."
-
-#: core/templates/core/class_list.html:10 core/views.py:68 core/views.py:147
-msgid "Create class"
-msgstr "Tạo lớp"
-
-#: core/templates/core/class_list.html:18
-msgid "Code"
-msgstr "Mã"
-
-#: core/templates/core/class_list.html:18
-msgid "Lessons"
-msgstr "Số buổi"
-
-#: core/templates/core/class_list.html:18
-msgid "Length"
-msgstr "Thời lượng"
-
-#: core/templates/core/class_list.html:19
-msgid "Price"
-msgstr "Giá"
-
-#: core/templates/core/class_list.html:19
-#: core/templates/core/statistics.html:24
-#: core/templates/core/student_list.html:3
-#: core/templates/core/student_list.html:7 core/views.py:69
-#: templates/partials/_nav.html:14
-msgid "Students"
-msgstr "Học sinh"
-
-#: core/templates/core/class_list.html:19
-msgid "Revenue"
-msgstr "Doanh thu"
-
-#: core/templates/core/class_list.html:19
 msgid "From"
 msgstr "Từ"
 
-#: core/templates/core/class_list.html:19
 msgid "To"
 msgstr "Đến"
 
-#: core/templates/core/class_list.html:20
+msgid "Apply"
+msgstr "Áp dụng"
+
+msgid "Reset"
+msgstr "Đặt lại"
+
+msgid "lessons"
+msgstr "buổi"
+
+msgid "Lesson"
+msgstr "Buổi học"
+
+msgid "Day off"
+msgstr "Ngày nghỉ"
+
+msgid "Today"
+msgstr "Hôm nay"
+
+msgid "No lessons in the given range."
+msgstr "Không có buổi nào trong khoảng này."
+
+msgid "Days off"
+msgstr "Ngày nghỉ"
+
+msgid "Add day off"
+msgstr "Thêm ngày nghỉ"
+
+msgid "Remove"
+msgstr "Xoá"
+
+msgid "None yet."
+msgstr "Chưa có."
+
+msgid "Fill in details and save the class."
+msgstr "Nhập thông tin và lưu lớp."
+
+msgid "Save"
+msgstr "Lưu"
+
+msgid "Cancel"
+msgstr "Huỷ"
+
+msgid "Classes"
+msgstr "Lớp học"
+
+msgid "Manage"
+msgstr "Quản lý"
+
+msgid "Class manager"
+msgstr "Quản lý lớp"
+
+msgid "Overview of all classes, their schedules and revenue."
+msgstr "Tổng quan tất cả các lớp, lịch và doanh thu."
+
+msgid "Create class"
+msgstr "Tạo lớp"
+
+msgid "Code"
+msgstr "Mã"
+
+msgid "Lessons"
+msgstr "Số buổi"
+
+msgid "Length"
+msgstr "Thời lượng"
+
+msgid "Price"
+msgstr "Giá"
+
+msgid "Students"
+msgstr "Học sinh"
+
+msgid "Revenue"
+msgstr "Doanh thu"
+
 msgid "Status"
 msgstr "Trạng thái"
 
-#: core/templates/core/class_list.html:30
 msgid "min"
 msgstr "phút"
 
-#: core/templates/core/class_list.html:31
-#: core/templates/core/class_list.html:33
 msgid "CZK"
 msgstr "CZK"
 
-#: core/templates/core/class_list.html:41
 #, python-format
 msgid "Close class %(code)s?"
 msgstr "Đóng lớp %(code)s?"
 
-#: core/templates/core/class_list.html:43 templates/partials/_messages.html:8
 msgid "Close"
 msgstr "Đóng"
 
-#: core/templates/core/class_list.html:49
-#: core/templates/core/student_list.html:33
 msgid "Edit"
 msgstr "Sửa"
 
-#: core/templates/core/class_list.html:50
 msgid "Times"
 msgstr "Giờ học"
 
-#: core/templates/core/class_times.html:3
+msgid "Calendar"
+msgstr "Lịch"
+
+msgid "Total revenue"
+msgstr "Tổng doanh thu"
+
+msgid "Enrolled students"
+msgstr "Học sinh đã đăng ký"
+
+msgid "Active classes"
+msgstr "Lớp đang hoạt động"
+
 #, python-format
 msgid "Schedule – %(code)s"
 msgstr "Thời khoá biểu – %(code)s"
 
-#: core/templates/core/class_times.html:6
 msgid "Schedule"
 msgstr "Thời khoá biểu"
 
-#: core/templates/core/class_times.html:7
 msgid "Set lesson times for this class."
 msgstr "Đặt giờ học cho lớp này."
 
-#: core/templates/core/class_times.html:16
 msgid "Day"
 msgstr "Ngày"
 
-#: core/templates/core/class_times.html:16
 msgid "Start"
 msgstr "Bắt đầu"
 
-#: core/templates/core/class_times.html:16
 msgid "End"
 msgstr "Kết thúc"
 
-#: core/templates/core/class_times.html:16
-#: core/templates/core/student_list.html:39
 msgid "Delete"
 msgstr "Xoá"
 
-#: core/templates/core/class_times.html:33
+msgid "Add row"
+msgstr "Thêm hàng"
+
 msgid "Back"
 msgstr "Quay lại"
 
-#: core/templates/core/dashboard.html:3
 msgid "Dashboard"
 msgstr "Bảng điều khiển"
 
-#: core/templates/core/dashboard.html:6
-#, python-format
-msgid "Hello, %(name)s."
-msgstr "Xin chào, %(name)s."
+msgid "Welcome back, %(name)s"
+msgstr "Chào mừng trở lại, %(name)s"
 
-#: core/templates/core/dashboard.html:7
-msgid "LCM management overview. Choose an action below."
-msgstr "Tổng quan quản lý LCM. Chọn một hành động bên dưới."
+msgid "Managing learning,"
+msgstr "Quản lý việc học,"
 
-#: core/templates/core/enrollment_form.html:7
-msgid "Assign a student to a class."
-msgstr "Gán học sinh vào lớp."
+msgid "in real time."
+msgstr "theo thời gian thực."
 
-#: core/templates/core/enrollment_list.html:3
-#: core/templates/core/enrollment_list.html:7 core/views.py:71
-#: templates/partials/_nav.html:15
-msgid "Enrollments"
-msgstr "Đăng ký"
+msgid ""
+"A clear view of your classes, students and schedules — all in one calm, "
+"editorial workspace."
+msgstr ""
 
-#: core/templates/core/enrollment_list.html:8
-msgid "Student → class link."
-msgstr "Liên kết học sinh → lớp."
+msgid "Quick actions"
+msgstr "Thao tác nhanh"
 
-#: core/templates/core/enrollment_list.html:10 core/views.py:72
-#: core/views.py:294
-msgid "Add enrollment"
-msgstr "Thêm đăng ký"
-
-#: core/templates/core/enrollment_list.html:18
-msgid "Student"
-msgstr "Học sinh"
-
-#: core/templates/core/enrollment_list.html:34
-msgid "Remove enrollment?"
-msgstr "Xoá đăng ký?"
-
-#: core/templates/core/enrollment_list.html:42
-msgid "No enrollments."
-msgstr "Không có đăng ký."
-
-#: core/templates/core/statistics.html:3 core/templates/core/statistics.html:6
-#: core/views.py:66 templates/partials/_nav.html:12
-msgid "Statistics"
-msgstr "Thống kê"
-
-#: core/templates/core/statistics.html:7
-msgid "System totals."
-msgstr "Tổng quan hệ thống."
-
-#: core/templates/core/statistics.html:16
-msgid "Teachers"
-msgstr "Giáo viên"
-
-#: core/templates/core/statistics.html:20
-msgid "Assistants"
-msgstr "Trợ giảng"
-
-#: core/templates/core/student_form.html:7
-msgid "Student details."
-msgstr "Thông tin học sinh."
-
-#: core/templates/core/student_list.html:8
-msgid "List of all students in the system."
-msgstr "Danh sách tất cả học sinh trong hệ thống."
-
-#: core/templates/core/student_list.html:10 core/views.py:70 core/views.py:249
-msgid "Add student"
-msgstr "Thêm học sinh"
-
-#: core/templates/core/student_list.html:18
-msgid "Birth no./VS"
-msgstr "Mã ĐD/VS"
-
-#: core/templates/core/student_list.html:34
-msgid "To class"
-msgstr "Vào lớp"
-
-#: core/templates/core/student_list.html:37
-msgid "Really delete this student?"
-msgstr "Thực sự xoá học sinh này?"
-
-#: core/templates/core/student_list.html:46
-msgid "No students."
-msgstr "Không có học sinh."
-
-#: core/templates/core/timetable.html:3 core/templates/core/timetable.html:7
-#: core/views.py:65 templates/partials/_nav.html:11
 msgid "Timetable"
 msgstr "Thời khoá biểu"
 
-#: core/templates/core/timetable.html:8
-msgid "Weekly view of all active classes."
-msgstr "Tổng quan tuần của tất cả các lớp đang hoạt động."
+msgid "Add student"
+msgstr "Thêm học sinh"
 
-#: core/templates/core/timetable.html:24
-msgid "no lessons"
-msgstr "không có buổi"
+msgid "Enrollments"
+msgstr "Đăng ký"
 
-#: core/templates/core/user_form.html:7
-msgid "Creates a new user account."
-msgstr "Tạo một tài khoản người dùng mới."
+msgid "Add enrollment"
+msgstr "Thêm đăng ký"
 
-#: core/templates/core/user_form.html:14
-msgid "Create"
-msgstr "Tạo"
-
-#: core/views.py:76 core/views.py:318
 msgid "Create user"
 msgstr "Tạo người dùng"
 
-#: core/views.py:145
+msgid "Today’s schedule"
+msgstr "Lịch học hôm nay"
+
+msgid "View all"
+msgstr "Xem tất cả"
+
+msgid "No lessons scheduled for today."
+msgstr "Hôm nay không có buổi học nào."
+
+msgid "Quick stats"
+msgstr "Thống kê nhanh"
+
+msgid "Total students"
+msgstr "Tổng số học sinh"
+
+msgid "Open statistics"
+msgstr "Mở thống kê"
+
+msgid "Assign a student to a class."
+msgstr "Gán học sinh vào lớp."
+
+msgid "Student → class link."
+msgstr "Liên kết học sinh → lớp."
+
+msgid "Student"
+msgstr "Học sinh"
+
+msgid "Remove enrollment?"
+msgstr "Xoá đăng ký?"
+
+msgid "No enrollments."
+msgstr "Không có đăng ký."
+
+msgid "Statistics"
+msgstr "Thống kê"
+
+msgid "Insights"
+msgstr "Phân tích"
+
+msgid "Overview"
+msgstr "Tổng quan"
+
+msgid "Key performance indicators"
+msgstr "Chỉ số hiệu suất chính"
+
+msgid "System totals at a glance."
+msgstr "Tổng quan toàn hệ thống."
+
+msgid "Teachers"
+msgstr "Giáo viên"
+
+msgid "Assistants"
+msgstr "Trợ giảng"
+
+msgid "Monthly activity"
+msgstr "Hoạt động hàng tháng"
+
+msgid "Interaction and attendance trends will appear here as data accrues."
+msgstr "Xu hướng tương tác và điểm danh sẽ hiển thị ở đây khi có dữ liệu."
+
+msgid "Team composition"
+msgstr "Thành phần nhóm"
+
+msgid "Student details."
+msgstr "Thông tin học sinh."
+
+msgid "Directory"
+msgstr "Danh bạ"
+
+msgid "Student management"
+msgstr "Quản lý học sinh"
+
+#, python-format
+msgid "%(counter)s student enrolled at the centre."
+msgid_plural "%(counter)s students enrolled at the centre."
+msgstr[0] "%(counter)s học sinh đã đăng ký tại trung tâm."
+
+msgid "To class"
+msgstr "Vào lớp"
+
+msgid "Really delete this student?"
+msgstr "Thực sự xoá học sinh này?"
+
+msgid "No students."
+msgstr "Không có học sinh."
+
+msgid "Week"
+msgstr "Tuần"
+
+msgid "Weekly timetable"
+msgstr "Lịch học tuần"
+
+msgid "Weekly view of all active classes."
+msgstr "Tổng quan tuần của tất cả các lớp đang hoạt động."
+
+msgid "Creates a new user account."
+msgstr "Tạo một tài khoản người dùng mới."
+
+msgid "Create"
+msgstr "Tạo"
+
 msgid "Class created. Set the lesson schedule."
 msgstr "Đã tạo lớp. Hãy đặt thời khoá biểu."
 
-#: core/views.py:158
 msgid "Class saved."
 msgstr "Đã lưu lớp."
 
-#: core/views.py:160
 #, python-format
 msgid "Edit %(code)s"
 msgstr "Sửa %(code)s"
 
-#: core/views.py:171
 msgid "Schedule saved."
 msgstr "Đã lưu thời khoá biểu."
 
-#: core/views.py:184
 #, python-format
 msgid "Class %(code)s has been closed."
 msgstr "Lớp %(code)s đã được đóng."
 
-#: core/views.py:197
 msgid "Day off added."
 msgstr "Đã thêm ngày nghỉ."
 
-#: core/views.py:219
+msgid "Total price:"
+msgstr "Tổng tiền:"
+
 msgid "Day off removed."
 msgstr "Đã xoá ngày nghỉ."
 
-#: core/views.py:247
 #, python-format
 msgid "Student %(name)s added."
 msgstr "Đã thêm học sinh %(name)s."
 
-#: core/views.py:258
 msgid "Student saved."
 msgstr "Đã lưu học sinh."
 
-#: core/views.py:260
 #, python-format
 msgid "Edit %(name)s"
 msgstr "Sửa %(name)s"
 
-#: core/views.py:270
 msgid "Student deleted."
 msgstr "Đã xoá học sinh."
 
-#: core/views.py:292
 msgid "Student added to class."
 msgstr "Đã thêm học sinh vào lớp."
 
-#: core/views.py:304
 msgid "Enrollment removed."
 msgstr "Đã xoá đăng ký."
 
-#: core/views.py:316
 #, python-format
 msgid "User %(username)s created."
 msgstr "Đã tạo người dùng %(username)s."
 
-#: lcm_dashboard/settings.py:95
 msgid "Czech"
 msgstr "Tiếng Séc"
 
-#: lcm_dashboard/settings.py:96
 msgid "English"
 msgstr "Tiếng Anh"
 
-#: lcm_dashboard/settings.py:97
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: templates/partials/_lang_switch.html:7
 msgid "Language"
 msgstr "Ngôn ngữ"
 
-#: templates/partials/_nav.html:3
 msgid "Main navigation"
 msgstr "Điều hướng chính"
 
-#: templates/partials/_nav.html:7
 msgid "Menu"
 msgstr "Menu"
 
-#: templates/partials/_nav.html:18
 msgid "Users"
 msgstr "Người dùng"
 
-#: templates/partials/_nav.html:19
 msgid "Admin"
 msgstr "Quản trị"
 
-#: templates/partials/_nav.html:26
 msgid "Logout"
 msgstr "Đăng xuất"
 
-#: templates/registration/login.html:3 templates/registration/login.html:11
-#: templates/registration/login.html:26
 msgid "Sign in"
 msgstr "Đăng nhập"
 
-#: templates/registration/login.html:19
+msgid "Welcome back to the LCM Manager."
+msgstr "Chào mừng trở lại LCM Manager."
+
 msgid "Username"
 msgstr "Tên đăng nhập"
 
-#: templates/registration/login.html:23
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: core/templates/core/class_calendar.html
-msgid "Download calendar image"
-msgstr "Tải ảnh lịch"
+#~ msgid "Add"
+#~ msgstr "Thêm"
 
-#: core/views.py
-msgid "Total price:"
-msgstr "Tổng tiền:"
+#~ msgid "LCM management overview. Choose an action below."
+#~ msgstr "Tổng quan quản lý LCM. Chọn một hành động bên dưới."
 
-#: core/views.py
-msgid "lessons"
-msgstr "buổi"
+#~ msgid "List of all students in the system."
+#~ msgstr "Danh sách tất cả học sinh trong hệ thống."
 
-#: core/templates/core/class_calendar.html
-msgid "Date range"
-msgstr "Khoảng thời gian"
+#~ msgid "Birth no./VS"
+#~ msgstr "Mã ĐD/VS"
 
-#: core/templates/core/class_calendar.html
-msgid "Apply"
-msgstr "Áp dụng"
+#~ msgid "no lessons"
+#~ msgstr "không có buổi"
 
-#: core/templates/core/class_calendar.html
-msgid "Reset"
-msgstr "Đặt lại"
+#~ msgid "Date range"
+#~ msgstr "Khoảng thời gian"

@@ -2,26 +2,73 @@
 {% load i18n %}
 {% block title %}{% trans "Statistics" %}{% endblock %}
 {% block content %}
-<header class="section">
-  <h2 class="mb-1">{% trans "Statistics" %}</h2>
-  <p class="text-muted">{% trans "System totals." %}</p>
+<header class="page-head">
+  <div>
+    <div class="page-head__crumbs"><span>{% trans "Insights" %}</span><span class="sep">/</span><span>{% trans "Overview" %}</span></div>
+    <h1 class="page-head__title">{% trans "Key performance indicators" %}</h1>
+    <p class="page-head__sub">{% trans "System totals at a glance." %}</p>
+  </div>
 </header>
-<section class="grid grid-stats">
-  <div class="stat-card" data-reveal data-reveal-group="stats">
+
+<section class="grid grid-stats mb-4">
+  <div class="stat-card stat-card--blue" data-reveal data-reveal-group="stats">
+    <div class="stat-card__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>
+    </div>
     <div class="stat-card__value">{{ class_count }}</div>
     <div class="stat-card__label">{% trans "Classes" %}</div>
   </div>
-  <div class="stat-card" data-reveal data-reveal-group="stats">
+  <div class="stat-card stat-card--teal" data-reveal data-reveal-group="stats">
+    <div class="stat-card__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>
+    </div>
     <div class="stat-card__value">{{ teacher_count }}</div>
     <div class="stat-card__label">{% trans "Teachers" %}</div>
   </div>
-  <div class="stat-card" data-reveal data-reveal-group="stats">
+  <div class="stat-card stat-card--purple" data-reveal data-reveal-group="stats">
+    <div class="stat-card__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.8"/><path d="M18.5 19a5 5 0 0 0-3-4.6"/></svg>
+    </div>
     <div class="stat-card__value">{{ assistant_count }}</div>
     <div class="stat-card__label">{% trans "Assistants" %}</div>
   </div>
-  <div class="stat-card" data-reveal data-reveal-group="stats">
+  <div class="stat-card stat-card--orange" data-reveal data-reveal-group="stats">
+    <div class="stat-card__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+    </div>
     <div class="stat-card__value">{{ student_count }}</div>
     <div class="stat-card__label">{% trans "Students" %}</div>
   </div>
 </section>
+
+<div class="grid grid-dash">
+  <section class="glass-card glass-card--strong" data-reveal>
+    <div class="glass-card__header">{% trans "Monthly activity" %}</div>
+    <p class="empty-note">{% trans "Interaction and attendance trends will appear here as data accrues." %}</p>
+  </section>
+
+  <aside class="glass-card glass-card--strong" data-reveal>
+    <div class="glass-card__header">{% trans "Team composition" %}</div>
+    <div class="qstat">
+      <div>
+        <div class="qstat__row">
+          <span class="qstat__label">{% trans "Teachers" %}</span>
+          <span class="qstat__value">{{ teacher_count }}</span>
+        </div>
+        <div class="progress"><div class="progress__bar" style="width: {% widthratio teacher_count student_count 100 %}%"></div></div>
+      </div>
+      <div>
+        <div class="qstat__row">
+          <span class="qstat__label">{% trans "Assistants" %}</span>
+          <span class="qstat__value">{{ assistant_count }}</span>
+        </div>
+        <div class="progress"><div class="progress__bar" style="width: {% widthratio assistant_count student_count 100 %}%"></div></div>
+      </div>
+      <div class="qstat__row">
+        <span class="qstat__label">{% trans "Students" %}</span>
+        <span class="qstat__value">{{ student_count }}</span>
+      </div>
+    </div>
+  </aside>
+</div>
 {% endblock %}

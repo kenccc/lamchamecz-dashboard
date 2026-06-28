@@ -1,29 +1,68 @@
 {% load i18n static %}
 {% if user.is_authenticated %}
-<nav class="glass-nav" aria-label="{% trans 'Main navigation' %}">
-  <a class="glass-nav__brand" href="{% url 'dashboard' %}" aria-label="Làm Cha Mẹ CZ">
-    <img class="glass-nav__logo" src="{% static 'core/img/logo.png' %}" alt="Làm Cha Mẹ CZ">
-  </a>
-  <button class="glass-nav__toggle" type="button" data-nav-toggle aria-label="{% trans 'Menu' %}">
-    <span></span>
-  </button>
-  <ul class="glass-nav__menu" data-nav-menu>
-    <li><a class="glass-nav__link" href="{% url 'timetable' %}">{% trans "Timetable" %}</a></li>
-    <li><a class="glass-nav__link" href="{% url 'statistics' %}">{% trans "Statistics" %}</a></li>
-    <li><a class="glass-nav__link" href="{% url 'class_list' %}">{% trans "Classes" %}</a></li>
-    <li><a class="glass-nav__link" href="{% url 'student_list' %}">{% trans "Students" %}</a></li>
-    <li><a class="glass-nav__link" href="{% url 'enrollment_list' %}">{% trans "Enrollments" %}</a></li>
-    <li><a class="glass-nav__link" href="{% url 'calendar_pick' %}">{% trans "Calendar" %}</a></li>
+<aside class="sidebar" aria-label="{% trans 'Main navigation' %}">
+  <div class="sidebar__top">
+    <a class="sidebar__brand" href="{% url 'dashboard' %}" aria-label="Làm Cha Mẹ CZ">
+      <img class="sidebar__logo" src="{% static 'core/img/logo.png' %}" alt="Làm Cha Mẹ CZ">
+    </a>
+    <button class="sidebar__toggle" type="button" data-nav-toggle aria-label="{% trans 'Menu' %}">
+      <span></span>
+    </button>
+  </div>
+
+  <nav class="sidebar__nav" data-nav-menu>
+    <a class="glass-nav__link" href="{% url 'dashboard' %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      {% trans "Dashboard" %}
+    </a>
+    <a class="glass-nav__link" href="{% url 'timetable' %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      {% trans "Timetable" %}
+    </a>
+    <a class="glass-nav__link" href="{% url 'statistics' %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
+      {% trans "Statistics" %}
+    </a>
+    <a class="glass-nav__link" href="{% url 'class_list' %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>
+      {% trans "Classes" %}
+    </a>
+    <a class="glass-nav__link" href="{% url 'student_list' %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.8"/><path d="M18.5 19a5 5 0 0 0-3-4.6"/></svg>
+      {% trans "Students" %}
+    </a>
+    <a class="glass-nav__link" href="{% url 'enrollment_list' %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>
+      {% trans "Enrollments" %}
+    </a>
+    <a class="glass-nav__link" href="{% url 'calendar_pick' %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><path d="M8 2.5v4"/><path d="M16 2.5v4"/></svg>
+      {% trans "Calendar" %}
+    </a>
     {% if user.is_app_admin %}
-      <li><a class="glass-nav__link" href="{% url 'user_create' %}">{% trans "Users" %}</a></li>
-      <li><a class="glass-nav__link" href="/admin/">{% trans "Admin" %}</a></li>
+      <a class="glass-nav__link" href="{% url 'user_create' %}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.2"/><path d="M4 19a6 6 0 0 1 12 0"/><path d="M19 8v6"/><path d="M16 11h6"/></svg>
+        {% trans "Users" %}
+      </a>
+      <a class="glass-nav__link" href="/admin/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l8 3.5v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10v-5z"/></svg>
+        {% trans "Admin" %}
+      </a>
     {% endif %}
-  </ul>
-  {% include "partials/_lang_switch.html" %}
-  <span class="glass-nav__user">{{ user.display_name }}</span>
-  <form method="post" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button class="btn btn--ghost btn--sm" type="submit">{% trans "Logout" %}</button>
-  </form>
-</nav>
+  </nav>
+
+  <div class="sidebar__foot">
+    <div class="sidebar__user">
+      <span class="sidebar__avatar">{{ user.display_name|slice:":1" }}</span>
+      <span>{{ user.display_name }}</span>
+    </div>
+    <div class="sidebar__foot-row">
+      {% include "partials/_lang_switch.html" %}
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button class="btn btn--ghost btn--sm" type="submit">{% trans "Logout" %}</button>
+      </form>
+    </div>
+  </div>
+</aside>
 {% endif %}

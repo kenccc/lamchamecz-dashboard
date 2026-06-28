@@ -37,7 +37,12 @@ from .models import (
     WEEKDAY_ORDER,
     Weekday,
 )
-from .services import working_days, working_days_by_month
+from .services import (
+    build_calendar_months,
+    weekday_headers,
+    working_days,
+    working_days_by_month,
+)
 
 
 _FONT_PATHS = {
@@ -187,20 +192,35 @@ def logout_view(request):
 
 @login_required
 def dashboard(request):
-    cards = [
-        (_("Timetable"), reverse("timetable")),
-        (_("Statistics"), reverse("statistics")),
-        (_("Class manager"), reverse("class_list")),
-        (_("Create class"), reverse("class_create")),
-        (_("Students"), reverse("student_list")),
-        (_("Add student"), reverse("student_create")),
-        (_("Enrollments"), reverse("enrollment_list")),
-        (_("Add enrollment"), reverse("enrollment_create")),
-        (_("Class calendar"), reverse("calendar_pick")),
-    ]
-    if request.user.is_app_admin:
-        cards.append((_("Create user"), reverse("user_create")))
-    return render(request, "core/dashboard.html", {"cards": cards})
+    is_admin = request.user.is_app_admin
+    class_qs = ClassRoom.objects.all()
+    student_qs = _visible_students_qs(request.user)
+    enrollment_qs = Enrollment.objects.all()
+    if not is_admin:
+        class_qs = class_qs.filter(teacher=request.user)
+        enrollment_qs = enrollment_qs.filter(classroom__teacher=request.user)
+
+    stats = {
+        "classes": class_qs.count(),
+        "active_classes": class_qs.filter(status=ClassStatus.ACTIVE).count(),
+        "students": student_qs.count(),
+        "enrollments": enrollment_qs.count(),
+    }
+
+    # Today's lessons — active classes whose schedule lands on today's weekday.
+    today_key = WEEKDAY_ORDER[date_type.today().weekday()]
+    today_lessons = []
+    for cls in (class_qs.filter(status=ClassStatus.ACTIVE)
+                .prefetch_related("times").select_related("teacher")):
+        for t in cls.times.all():
+            if t.weekday == today_key:
+                today_lessons.append({"cls": cls, "time": t})
+    today_lessons.sort(key=lambda r: r["time"].time_start)
+
+    return render(request, "core/dashboard.html", {
+        "stats": stats,
+        "today_lessons": today_lessons,
+    })
 
 
 @login_required
@@ -215,17 +235,54 @@ def timetable(request):
         qs = qs.filter(teacher=request.user)
 
     grid: "OrderedDict[str, list]" = OrderedDict((d, []) for d in WEEKDAY_ORDER)
+    starts: list[int] = []
+    ends: list[int] = []
     for cls in qs:
         for t in cls.times.all():
             if t.weekday in grid:
                 grid[t.weekday].append({"cls": cls, "time": t})
+                starts.append(t.time_start.hour * 60 + t.time_start.minute)
+                ends.append(t.time_end.hour * 60 + t.time_end.minute)
 
-    for day in grid:
-        grid[day].sort(key=lambda r: r["time"].time_start)
+    # Google-calendar style time axis: hourly rows, lessons positioned by clock.
+    HOUR_PX = 64
+    start_h = min(starts) // 60 if starts else 8
+    end_h = -(-max(ends) // 60) if ends else 17  # ceil to next whole hour
+    start_h = min(start_h, 8)
+    end_h = max(end_h, 17)
+    win_start = start_h * 60
+    hours = list(range(start_h, end_h + 1))
+    body_h = (end_h - start_h) * HOUR_PX
 
+    today_key = WEEKDAY_ORDER[date_type.today().weekday()]
     weekday_labels = dict(Weekday.choices)
-    days = [(d, weekday_labels[d], grid[d]) for d in WEEKDAY_ORDER]
-    return render(request, "core/timetable.html", {"days": days})
+    columns = []
+    for d in WEEKDAY_ORDER:
+        slots = sorted(grid[d], key=lambda r: r["time"].time_start)
+        lessons = []
+        for s in slots:
+            t = s["time"]
+            smin = t.time_start.hour * 60 + t.time_start.minute
+            emin = t.time_end.hour * 60 + t.time_end.minute
+            lessons.append({
+                "cls": s["cls"],
+                "time": t,
+                "top": round((smin - win_start) / 60 * HOUR_PX),
+                "height": max(round((emin - smin) / 60 * HOUR_PX), 30),
+            })
+        columns.append({
+            "key": d,
+            "label": weekday_labels[d],
+            "lessons": lessons,
+            "is_today": d == today_key,
+        })
+
+    return render(request, "core/timetable.html", {
+        "columns": columns,
+        "hours": hours,
+        "hour_px": HOUR_PX,
+        "body_h": body_h,
+    })
 
 
 @login_required
@@ -263,7 +320,17 @@ def class_list(request):
         else:
             fee = cls.fee_per_lesson * Decimal(cls.student_count) * Decimal(cls.total_lessons)
         rows.append({"cls": cls, "fee": fee})
-    return render(request, "core/class_list.html", {"rows": rows})
+
+    total_revenue = sum((r["fee"] for r in rows), Decimal(0))
+    total_students = sum(r["cls"].student_count for r in rows)
+    active_count = sum(1 for r in rows if not r["cls"].is_closed)
+    summary = {
+        "revenue": total_revenue,
+        "students": total_students,
+        "active": active_count,
+        "total": len(rows),
+    }
+    return render(request, "core/class_list.html", {"rows": rows, "summary": summary})
 
 
 @login_required
@@ -346,11 +413,15 @@ def class_calendar(request, pk: int):
         range_start, range_end = None, None
 
     days = working_days(cls, date_start=range_start, date_end=range_end)
-    months = working_days_by_month(days)
+    days_off = list(cls.days_off.all())
+    calendar_months = build_calendar_months(
+        days, [d.date for d in days_off], today=date_type.today()
+    )
     return render(request, "core/class_calendar.html", {
         "cls": cls,
-        "months": months,
-        "days_off": cls.days_off.all(),
+        "calendar_months": calendar_months,
+        "weekday_headers": weekday_headers(),
+        "days_off": days_off,
         "form": form,
         "session_count": len(days),
         "range_start": (range_start or cls.date_start).isoformat(),

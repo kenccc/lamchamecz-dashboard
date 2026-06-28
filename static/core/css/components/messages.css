@@ -57,6 +57,6 @@
 }
 
 .flash__close:hover {
-  background: rgba(74, 44, 25, 0.08);
+  background: var(--accent-soft);
   color: var(--text);
 }

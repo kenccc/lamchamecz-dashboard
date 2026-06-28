@@ -10,12 +10,12 @@
   width: 100%;
   max-width: 440px;
   padding: 44px 40px;
-  background: var(--surface-strong);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-2xl);
+  background: var(--glass-surface-strong);
   backdrop-filter: var(--blur-strong);
   -webkit-backdrop-filter: var(--blur-strong);
-  box-shadow: var(--shadow-lg), var(--inner-highlight-strong);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
 }
 
 .auth-card__brand {
@@ -43,13 +43,46 @@
   object-fit: contain;
 }
 
-.auth-card__brand p {
+.auth-card__title {
   font-family: var(--serif);
-  font-style: italic;
+  font-weight: 700;
+  font-size: var(--fs-36);
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+
+.auth-card__brand p {
+  font-family: var(--sans);
   font-weight: 400;
-  font-size: var(--fs-20);
+  font-size: var(--fs-15);
   color: var(--text-muted);
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   text-transform: none;
   margin: 0;
 }
+
+/* Uppercase, tracked submit — editorial CTA. */
+.auth-card .btn--lg {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: var(--fs-13);
+}
+
+/* Soft atmospheric wash behind the auth card. */
+.app-auth::before,
+.app-auth::after {
+  content: "";
+  position: fixed;
+  width: 46vw;
+  height: 46vw;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.05;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+.app-auth::before { top: -12%; left: -12%; }
+.app-auth::after { bottom: -12%; right: -12%; }
+.app-auth__inner, .auth-shell { position: relative; z-index: 1; }
